@@ -22,11 +22,11 @@ class FindController {
             let result
             let count
 
-            if(JSON.stringify(tags) == JSON.stringify([""])) {
+            if (JSON.stringify(tags) == JSON.stringify([""])) {
                 result = await collection.find().skip(start).limit(end - start + 1).toArray();
             } else {
                 result = await collection.find({ $text: { $search: tags.join(" ") } }, { score: { $meta: "textScore" } }).skip(start).limit(end - start + 1).toArray();
-               
+
             }
 
 
@@ -201,19 +201,21 @@ class FindController {
             const collection = db.collection('tender')
             const purchaseProtocol = db.collection('purchaseProtocol')
 
-            const tender = await collection.findOne({$or: [
-                {"commonInfo.purchaseNumber": id},
-                {registrationNumber: id}
-            ]})
+            const tender = await collection.findOne({
+                $or: [
+                    { "commonInfo.purchaseNumber": id },
+                    { registrationNumber: id }
+                ]
+            })
 
-            const purchase = await purchaseProtocol.find({fz: "fz223", "purchaseInfo.purchaseNoticeNumber": id}).toArray()
-        
+            const purchase = await purchaseProtocol.find({ fz: "fz223", "purchaseInfo.purchaseNoticeNumber": id }).toArray()
 
 
-            if (!tender) return res.status(400).json({message: 'not found'})
 
-            return res.json({purchaseProtocol: purchase, tender: [tender], explanation: []})
-            
+            if (!tender) return res.status(400).json({ message: 'not found' })
+
+            return res.json({ purchaseProtocol: purchase, tender: [tender], explanation: [] })
+
         } catch (error) {
             console.log(error);
             return res.status(400).json({ message: 'error', error })
