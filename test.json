@@ -1,0 +1,762 @@
+name, publicationDateTime, documentationDelivery.deliveryStartDateTime, documentationDelivery.deliveryEndDateTime, fz, customer.region, registrationNumber, customer.mainInfo.fullName, customer.mainInfo.inn, lots.lot.lotData.initialSum, urlEIS, lots.lot.lotData.lotItems.lotItem.okpd2.name 
+
+
+tags: // Должен искать все соответствия этих слов в поле name,
+stopTags: // Должен исключить из поля name эти слова,
+publicDateFrom: // Должен искать по полю "publicationDateTime" все соответствия которые входят в диапазон дат publicDateFrom - publicDateTo,
+publicDateTo: // Должен искать по полю "publicationDateTime" все соответствия которые входят в диапазон дат publicDateFrom - publicDateTo,
+startDateFrom:
+
+
+{
+    "explanation": [],
+    "purchaseProtocol": [
+        {
+            "_id": "659bcac22300c6075c2ed489",
+            "createDateTime": "2023-12-11T09:43:14",
+            "urlEIS": "https://lk.zakupki.gov.ru/223/purchase/private/purchase/protocol-info/details.html?protocolInfoId=18300983",
+            "purchaseInfo": {
+                "purchaseNoticeNumber": "32313037916",
+                "name": "Поставка нефтепродуктов (бензин, дизельное топливо) через АЗС с использованием электронных карт",
+                "purchaseMethodCode": "200610",
+                "purchaseCodeName": "Запрос котировок в электронной форме, участниками которого могут быть только субъекты малого и среднего предпринимательства",
+                "emergency": "false"
+            },
+            "registrationNumber": "32313037916-01",
+            "placer": {
+                "mainInfo": {
+                    "fullName": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"СБЕРБАНК-АВТОМАТИЗИРОВАННАЯ СИСТЕМА ТОРГОВ\"",
+                    "shortName": "АО \"СБЕРБАНК - АСТ\"",
+                    "iko": "67707308480770401001",
+                    "inn": "7707308480",
+                    "kpp": "770401001",
+                    "ogrn": "1027707000441",
+                    "legalAddress": "119435, ПЕР. БОЛЬШОЙ САВВИНСКИЙ, Д. 12, СТР. 9, ЭТ/ПОМ/КОМ 1/I/2",
+                    "postalAddress": "Большой Саввинский переулок, дом 12, стр. 9 .",
+                    "okato": "45286585000",
+                    "okopf": "12267",
+                    "okopfName": "Непубличные акционерные общества",
+                    "okpo": "58997535",
+                    "okfs": "16",
+                    "okfsName": "Частная собственность"
+                }
+            },
+            "customer": {
+                "mainInfo": {
+                    "fullName": "МУНИЦИПАЛЬНОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ \"МАЙКОПСКОЕ ТРОЛЛЕЙБУСНОЕ УПРАВЛЕНИЕ \"МУНИЦИПАЛЬНОГО ОБРАЗОВАНИЯ \"ГОРОД МАЙКОП\"",
+                    "shortName": "МУП МТУ",
+                    "iko": "50105001273010501001",
+                    "inn": "0105001273",
+                    "kpp": "010501001",
+                    "ogrn": "1020100705877",
+                    "legalAddress": "385018, Г.. МАЙКОП, УЛ. КУРГАННАЯ, Д.714",
+                    "postalAddress": "385018, г Майкоп, ул Курганная, дом 714",
+                    "email": "eltrans74@mail.ru",
+                    "okato": "79401000000",
+                    "okopf": "65243",
+                    "okopfName": "Муниципальные унитарные предприятия",
+                    "okpo": "03221368",
+                    "okfs": "14",
+                    "okfsName": "Муниципальная собственность"
+                }
+            },
+            "missedContest": "true",
+            "missedReason": "Конкурентная закупка признана несостоявшейся в связи с тем, что на участие в закупке подана только одна заявка",
+            "purchaseCancellationReason": "ONE_APPLICATION_SUBMITTED",
+            "publicationDateTime": "2023-12-11T09:43:15",
+            "status": "P",
+            "version": "1",
+            "attachments": {
+                "totalDocumentsCount": "1",
+                "document": {
+                    "createDateTime": "2023-12-11T09:43:14",
+                    "fileName": "Протокол №6.pdf",
+                    "description": "Протокол №6.pdf",
+                    "url": "https://zakupki.gov.ru/223/purchase/public/download/download.html?id=90396008"
+                }
+            },
+            "signatureAuthorizedBody": "",
+            "type": "161917",
+            "typeName": "Итоговый протокол",
+            "targetPhaseCode": "0",
+            "procedureDate": "2023-12-11T09:20:00",
+            "procedurePlace": "В соответствии с требованиями закупочной документации",
+            "lotApplicationsList": {
+                "protocolLotApplications": {
+                    "lot": {
+                        "ordinalNumber": "1",
+                        "subject": "Поставка нефтепродуктов (бензин, дизельное топливо) через АЗС с использованием электронных карт",
+                        "currency": {
+                            "code": "RUB",
+                            "digitalCode": "643",
+                            "name": "Российский рубль"
+                        },
+                        "initialSum": "1598825.47"
+                    },
+                    "application": {
+                        "applicationDate": "2023-12-07T11:35:52",
+                        "applicationNumber": "3462",
+                        "price": "1508435.85",
+                        "currency": {
+                            "code": "RUB",
+                            "digitalCode": "643",
+                            "name": "Российский рубль"
+                        },
+                        "accepted": "T",
+                        "considerationResultInfo": {
+                            "accepted": "T"
+                        },
+                        "contractSigned": "true",
+                        "additionalPrice": "1508435.85",
+                        "commissionDecisionPlace": "0"
+                    }
+                }
+            },
+            "protocolSignDate": "2023-12-11",
+            "templateVersion": "2",
+            "templateStructure": {
+                "level": [
+                    {
+                        "tabLevel": "PROTOCOL",
+                        "tab": [
+                            {
+                                "tabOrdinal": "1",
+                                "tabName": "Общая информация",
+                                "fixedName": "MAIN",
+                                "section": [
+                                    {
+                                        "sectionOrdinal": "1",
+                                        "sectionName": "Общие сведения",
+                                        "fixedName": "MAIN_INFO"
+                                    },
+                                    {
+                                        "sectionOrdinal": "2",
+                                        "sectionName": "Основание для формирования протокола",
+                                        "fixedName": "MAIN_PROTOCOL_FORMING_BASIS"
+                                    },
+                                    {
+                                        "sectionOrdinal": "3",
+                                        "sectionName": "Место и время проведения процедуры",
+                                        "fixedName": "MAIN_DATE_PLACE"
+                                    },
+                                    {
+                                        "sectionOrdinal": "4",
+                                        "sectionName": "Сведения о комиссии",
+                                        "fixedName": "MAIN_COMM_INFO"
+                                    },
+                                    {
+                                        "sectionOrdinal": "5",
+                                        "sectionName": "Признание закупки несостоявшейся",
+                                        "fixedName": "MAIN_INVALID_INFO"
+                                    },
+                                    {
+                                        "sectionOrdinal": "7",
+                                        "sectionName": "Дополнительная информация",
+                                        "fixedName": "MAIN_ADDITIONAL_INFO"
+                                    }
+                                ]
+                            },
+                            {
+                                "tabOrdinal": "2",
+                                "tabName": "Список заявок",
+                                "fixedName": "APP_LIST",
+                                "section": [
+                                    {
+                                        "sectionOrdinal": "1",
+                                        "sectionName": "Лоты закупки",
+                                        "fixedName": "APP_LIST_TABLE"
+                                    },
+                                    {
+                                        "sectionOrdinal": "2",
+                                        "sectionName": "Заявки",
+                                        "fixedName": "APP_APPS"
+                                    }
+                                ]
+                            },
+                            {
+                                "tabOrdinal": "3",
+                                "tabName": "Результат рассмотрения",
+                                "fixedName": "CONSIDERATION_RESULT",
+                                "section": [
+                                    {
+                                        "sectionOrdinal": "1",
+                                        "sectionName": "Результат рассмотрения",
+                                        "fixedName": "consideration_result_1"
+                                    },
+                                    {
+                                        "sectionOrdinal": "2",
+                                        "sectionName": "Результат рассмотрения",
+                                        "fixedName": "consideration_result_2"
+                                    }
+                                ]
+                            },
+                            {
+                                "tabOrdinal": "4",
+                                "tabName": "Результат оценки",
+                                "fixedName": "ASSESSMENT_RESULT",
+                                "section": [
+                                    {
+                                        "sectionOrdinal": "1",
+                                        "sectionName": "Лоты закупки",
+                                        "fixedName": "ASSESSMENT_RESULT_PURCHASE_LOTS"
+                                    },
+                                    {
+                                        "sectionOrdinal": "2",
+                                        "sectionName": "Информация по заявкам с ассоциированной таблицей",
+                                        "fixedName": "ASSESSMENT_RESULT_ASSOCIATED_PURCHASE_INFO"
+                                    },
+                                    {
+                                        "sectionOrdinal": "3",
+                                        "sectionName": "Решение комиссии. Оценка",
+                                        "fixedName": "ASSESSMENT_RESULT_COMM_DECISION"
+                                    }
+                                ]
+                            },
+                            {
+                                "tabOrdinal": "5",
+                                "tabName": "Документация",
+                                "fixedName": "DOCS",
+                                "section": {
+                                    "sectionOrdinal": "1",
+                                    "sectionName": "Документы",
+                                    "fixedName": "DOCS"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "tabLevel": "APPLICATION",
+                        "tab": {
+                            "tabOrdinal": "1",
+                            "tabName": "Формирование заявки",
+                            "fixedName": "APP_INFO",
+                            "section": [
+                                {
+                                    "sectionOrdinal": "1",
+                                    "sectionName": "Сведения об участнике",
+                                    "fixedName": "APP_INFO_MEMBER"
+                                },
+                                {
+                                    "sectionOrdinal": "2",
+                                    "sectionName": "Сведения о заявке",
+                                    "fixedName": "APP_INFO"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "hiddenProtocolFields": {
+                    "code": [
+                        "comparison-result",
+                        "qualification-result",
+                        "explanation-request-result",
+                        "comparison-result_purchase-lots_info-table",
+                        "comparison-result_purchase-lots_info-table-number",
+                        "comparison-result_purchase-lots_info-table-name",
+                        "comparison-result_purchase-lots_info-table-contract-price",
+                        "comparison-result_purchase-lots_info-table-amount",
+                        "comparison-result_purchase-lots_info-table-currency",
+                        "comparison-result_purchase-lots_info-table-not-price",
+                        "comparison-result_purchase-lots_currency",
+                        "comparison-result_purchase-lots_not-price",
+                        "comparison-result_applications-info-table_table",
+                        "comparison-result_applications-info-table_table-number",
+                        "comparison-result_applications-info-table_table-participant",
+                        "comparison-result_applications-info-table_table-registration-time",
+                        "comparison-result_applications-info-table_table-price-offer",
+                        "comparison-result_applications-info-table_table-application-utility-number",
+                        "comparison-result_applications-info-table_participant",
+                        "comparison-result_applications-info-table_price-offer",
+                        "comparison-result_applications-info-table_application-utility-number",
+                        "comparison-result_purchase-lots",
+                        "comparison-result_applications-info-table",
+                        "qualification-result_lots",
+                        "qualification-result_table-info",
+                        "qualification-result_lots_table-info",
+                        "qualification-result_lots_table-info_lot-number",
+                        "qualification-result_lots_table-info_lot-name",
+                        "qualification-result_lots_table-info_contract-price",
+                        "qualification-result_lots_table-info_application-count",
+                        "qualification-result_lots_table-info_approved-application-count",
+                        "qualification-result_lots_table-info_declined-application-count",
+                        "qualification-result_table-info_table-info",
+                        "qualification-result_table-info_table-info_application-number",
+                        "qualification-result_table-info_table-info_participant",
+                        "qualification-result_table-info_table-info_commission-decision",
+                        "explanation-request-result_lots",
+                        "explanation-request-result_table-info",
+                        "explanation-request-result_lots_table-info",
+                        "explanation-request-result_lots_table-info_lot-number",
+                        "explanation-request-result_lots_table-info_lot-name",
+                        "explanation-request-result_lots_table-info_contract-price",
+                        "explanation-request-result_lots_table-info_application-count",
+                        "explanation-request-result_lots_table-info_approved-application-count",
+                        "explanation-request-result_table-info_table-info",
+                        "explanation-request-result_table-info_table-info_application-number",
+                        "explanation-request-result_table-info_table-info_participant",
+                        "explanation-request-result_table-info_table-info_commission-decision"
+                    ]
+                }
+            },
+            "templateBlocks": {
+                "hideCommDecision": "true",
+                "hideCommDecisionAccess": "true",
+                "hideCommDecisionResult": "true",
+                "hideProcedure": "false",
+                "hideCancellation": "false"
+            },
+            "extendFields": {
+                "protocolExtendField": {
+                    "extendField": [
+                        {
+                            "integrCode": "emPlacementDate",
+                            "description": "Размещено на ЭП",
+                            "type": "DATETIME",
+                            "value": {
+                                "dateTime": "2023-12-11T09:42:00"
+                            }
+                        },
+                        {
+                            "integrCode": "emProtocolUrl",
+                            "description": "Протокол на ЭП",
+                            "type": "LINK",
+                            "value": {
+                                "url": "1381244"
+                            }
+                        }
+                    ],
+                    "position": {
+                        "tabOrdinal": "1",
+                        "tabName": "MAIN",
+                        "sectionOrdinal": "1",
+                        "sectionName": "MAIN_INFO"
+                    }
+                }
+            },
+            "commissionNumber": "6",
+            "commissionName": "комиссия по закупкам МУП МТУ",
+            "commissionResult": "Так как была подана только одна заявка то запрос котировок в электронной форме на право заключения договора на право заключения договора на поставку нефтепродуктов (бензин, дизельное топливо) через АЗС с использованием электронных карт признать несостоявшимся.",
+            "fz": "fz223"
+        }
+    ],
+    "tender": [
+        {
+            "_id": "657a4f17f74250a1dfaaad57",
+            "createDateTime": "2023-12-01T16:44:13",
+            "urlEIS": "https://lk.zakupki.gov.ru/223/purchase/private/purchase/notice-info/details.html?noticeInfoId=16080530",
+            "urlVSRZ": "http://utp.sberbank-ast.ru/Trade/NBT/PurchaseView/22/0/0/1381244",
+            "registrationNumber": "32313037916",
+            "name": "Поставка нефтепродуктов (бензин, дизельное топливо) через АЗС с использованием электронных карт",
+            "customer": {
+                "mainInfo": {
+                    "fullName": "МУНИЦИПАЛЬНОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ \"МАЙКОПСКОЕ ТРОЛЛЕЙБУСНОЕ УПРАВЛЕНИЕ \"МУНИЦИПАЛЬНОГО ОБРАЗОВАНИЯ \"ГОРОД МАЙКОП\"",
+                    "shortName": "МУП МТУ",
+                    "iko": "50105001273010501001",
+                    "inn": "0105001273",
+                    "kpp": "010501001",
+                    "ogrn": "1020100705877",
+                    "legalAddress": "385018, Г.. МАЙКОП, УЛ. КУРГАННАЯ, Д.714",
+                    "postalAddress": "385018, г Майкоп, ул Курганная, дом 714",
+                    "email": "eltrans74@mail.ru",
+                    "okato": "79401000000",
+                    "okopf": "65243",
+                    "okopfName": "Муниципальные унитарные предприятия",
+                    "okpo": "03221368",
+                    "okfs": "14",
+                    "okfsName": "Муниципальная собственность",
+                    "timeZone": {
+                        "offset": "0",
+                        "name": "МСК (СГВ+3) Москва, Волгоград"
+                    },
+                    "region": "Республика Адыгея (Адыгея)"
+                }
+            },
+            "purchaseMethodCode": "200610",
+            "purchaseCodeName": "Запрос котировок в электронной форме, участниками которого могут быть только субъекты малого и среднего предпринимательства",
+            "placer": {
+                "mainInfo": {
+                    "fullName": "АКЦИОНЕРНОЕ ОБЩЕСТВО \"СБЕРБАНК-АВТОМАТИЗИРОВАННАЯ СИСТЕМА ТОРГОВ\"",
+                    "shortName": "АО \"СБЕРБАНК - АСТ\"",
+                    "iko": "67707308480770401001",
+                    "inn": "7707308480",
+                    "kpp": "770401001",
+                    "ogrn": "1027707000441",
+                    "legalAddress": "119435, ПЕР. БОЛЬШОЙ САВВИНСКИЙ, Д. 12, СТР. 9, ЭТ/ПОМ/КОМ 1/I/2",
+                    "postalAddress": "Большой Саввинский переулок, дом 12, стр. 9 .",
+                    "okato": "45286585000",
+                    "okopf": "12267",
+                    "okopfName": "Непубличные акционерные общества",
+                    "okpo": "58997535",
+                    "okfs": "16",
+                    "okfsName": "Частная собственность"
+                }
+            },
+            "contact": {
+                "lastName": "Хаов Анзор Байзетович",
+                "phone": "89034661380",
+                "email": "eltrans74@mail.ru"
+            },
+            "publicationDateTime": "2023-12-01T16:51:10",
+            "documentationDelivery": {
+                "deliveryStartDateTime": "2023-12-04",
+                "deliveryEndDateTime": "2023-12-08",
+                "place": "http://utp.sberbank-ast.ru/Trade",
+                "procedure": "http://utp.sberbank-ast.ru/Trade"
+            },
+            "status": "P",
+            "version": "1",
+            "notDishonest": "true",
+            "attachments": {
+                "totalDocumentsCount": "2",
+                "document": [
+                    {
+                        "createDateTime": "2023-12-01T16:44:13",
+                        "fileName": "Проект Договора.doc",
+                        "description": "Проект Договора.doc",
+                        "url": "https://zakupki.gov.ru/223/purchase/public/download/download.html?id=90172403"
+                    },
+                    {
+                        "createDateTime": "2023-12-01T16:44:13",
+                        "fileName": "Извещение бензин 11.2023.docx",
+                        "description": "Извещение бензин 11.2023.docx",
+                        "url": "https://zakupki.gov.ru/223/purchase/public/download/download.html?id=90172402"
+                    }
+                ]
+            },
+            "modificationDate": "2023-12-01T16:51:10",
+            "saveUserId": "9134989",
+            "deliveryPlaceIndication": "DIFFERENT_PLACE",
+            "emergency": "false",
+            "jointPurchase": "false",
+            "forSmallOrMiddle": "false",
+            "antimonopolyDecisionTaken": "false",
+            "applSubmisionStartDate": "2023-12-04",
+            "applSubmisionOrder": "В соответствии с требованиями закупочной документации",
+            "summingupOrder": "В соответствии с требованиями закупочной документации",
+            "signatureAuthorizedBody": "",
+            "electronicPlaceInfo": {
+                "name": "АКЦИОНЕРНОЕ ОБЩЕСТВО «СБЕРБАНК-АВТОМАТИЗИРОВАННАЯ СИСТЕМА ТОРГОВ»",
+                "url": "http://www.sberbank-ast.ru",
+                "electronicPlaceId": "5",
+                "specialized": "false"
+            },
+            "placingProcedure": {
+                "summingupDateTime": "2023-12-11T00:00:00",
+                "summingupPlace": "В соответствии с требованиями закупочной документации"
+            },
+            "submissionCloseDateTime": "2023-12-08T08:00:00",
+            "publicationPlannedDate": "2023-12-01",
+            "templateVersion": "2",
+            "templateStructure": {
+                "level": [
+                    {
+                        "tabLevel": "NOTICE",
+                        "tab": [
+                            {
+                                "tabOrdinal": "1",
+                                "tabName": "Общая информация",
+                                "fixedName": "MAIN",
+                                "section": [
+                                    {
+                                        "sectionOrdinal": "1",
+                                        "sectionName": "Сведения о состоянии извещения",
+                                        "fixedName": "MAIN_STATUS"
+                                    },
+                                    {
+                                        "sectionOrdinal": "2",
+                                        "sectionName": "Сведения о заказчике",
+                                        "fixedName": "MAIN_CUSTOMER"
+                                    },
+                                    {
+                                        "sectionOrdinal": "3",
+                                        "sectionName": "Сведения об обособленном подразделении",
+                                        "fixedName": "MAIN_DETACHED_DEPARTMENT"
+                                    },
+                                    {
+                                        "sectionOrdinal": "4",
+                                        "sectionName": "Cведения о закупке",
+                                        "fixedName": "MAIN_PURCHASE"
+                                    },
+                                    {
+                                        "sectionOrdinal": "5",
+                                        "sectionName": "Требования к участникам закупки",
+                                        "fixedName": "MAIN_PARTICIPANT_REQUIREMENTS"
+                                    },
+                                    {
+                                        "sectionOrdinal": "6",
+                                        "sectionName": "Контактная информация",
+                                        "fixedName": "MAIN_CONTACTS"
+                                    },
+                                    {
+                                        "sectionOrdinal": "7",
+                                        "sectionName": "Дополнительная информация",
+                                        "fixedName": "MAIN_ADDITIONAL_INFO"
+                                    }
+                                ]
+                            },
+                            {
+                                "tabOrdinal": "2",
+                                "tabName": "Порядок проведения процедуры",
+                                "fixedName": "COMMISSION",
+                                "section": [
+                                    {
+                                        "sectionOrdinal": "1",
+                                        "sectionName": "Размещение извещения",
+                                        "fixedName": "COMMISSION_PUBLISH"
+                                    },
+                                    {
+                                        "sectionOrdinal": "2",
+                                        "sectionName": "Подача заявок",
+                                        "fixedName": "APPLICATIONS_SUBMISSION"
+                                    },
+                                    {
+                                        "sectionOrdinal": "4",
+                                        "sectionName": "Обсуждение функциональных характеристик",
+                                        "fixedName": "FUNCTIONAL_CHARACTERISTIC"
+                                    },
+                                    {
+                                        "sectionOrdinal": "5",
+                                        "sectionName": "Обсуждение предложений о функциональных характеристиках",
+                                        "fixedName": "FUNCTIONAL_CHARACTERISTIC_DISCUSSION"
+                                    },
+                                    {
+                                        "sectionOrdinal": "6",
+                                        "sectionName": "Рассмотрение и оценка окончательных предложений о функциональных характеристиках",
+                                        "fixedName": "FUNCTIONAL_CHARACTERISTIC_ASSESSMENT_AND_FINAL_OFFER"
+                                    },
+                                    {
+                                        "sectionOrdinal": "7",
+                                        "sectionName": "Рассмотрение первых частей заявок",
+                                        "fixedName": "APPLICATIONS_EXAM_FIRST_PART"
+                                    },
+                                    {
+                                        "sectionOrdinal": "8",
+                                        "sectionName": "Подача ценовых предложений",
+                                        "fixedName": "PRICE_OFFER_SUBMISSION"
+                                    },
+                                    {
+                                        "sectionOrdinal": "9",
+                                        "sectionName": "Сопоставление ценовых предложений",
+                                        "fixedName": "PRICE_OFFER_COMPARISION"
+                                    },
+                                    {
+                                        "sectionOrdinal": "10",
+                                        "sectionName": "Подача дополнительных ценовых предложений",
+                                        "fixedName": "ADDITIONAL_PRICE_OFFER_APPLICATION"
+                                    },
+                                    {
+                                        "sectionOrdinal": "11",
+                                        "sectionName": "Сопоставление дополнительных ценовых предложений",
+                                        "fixedName": "ADDITIONAL_PRICE_OFFER_COMPARISION"
+                                    },
+                                    {
+                                        "sectionOrdinal": "12",
+                                        "sectionName": "Квалификационный отбор",
+                                        "fixedName": "QUALIFYING_SELECTION"
+                                    },
+                                    {
+                                        "sectionOrdinal": "13",
+                                        "sectionName": "Рассмотрение вторых частей заявок",
+                                        "fixedName": "APPLICATIONS_EXAM_SECOND_PART"
+                                    },
+                                    {
+                                        "sectionOrdinal": "14",
+                                        "sectionName": "Рассмотрение котировочных заявок",
+                                        "fixedName": "QUTATION_EXAMINATION_APP"
+                                    },
+                                    {
+                                        "sectionOrdinal": "15",
+                                        "sectionName": "Форма котировочной заявки",
+                                        "fixedName": "QUTATION_EXAMINATION_APP_FORM"
+                                    },
+                                    {
+                                        "sectionOrdinal": "16",
+                                        "sectionName": "Вскрытие конвертов",
+                                        "fixedName": "ENVELOPE_OPENING"
+                                    },
+                                    {
+                                        "sectionOrdinal": "17",
+                                        "sectionName": "Проведение аукциона",
+                                        "fixedName": "AUCTION_EXECUTION"
+                                    },
+                                    {
+                                        "sectionOrdinal": "18",
+                                        "sectionName": "Проведение аукциона в электронной форме",
+                                        "fixedName": "EAUCTION_EXECUTION"
+                                    },
+                                    {
+                                        "sectionOrdinal": "19",
+                                        "sectionName": "Подведение итогов",
+                                        "fixedName": "SUMMARIZING"
+                                    }
+                                ]
+                            },
+                            {
+                                "tabOrdinal": "3",
+                                "tabName": "Список лотов",
+                                "fixedName": "LOTS",
+                                "section": {
+                                    "sectionOrdinal": "1",
+                                    "sectionName": "Сведения о лотах",
+                                    "fixedName": "LOTS_INFO"
+                                }
+                            },
+                            {
+                                "tabOrdinal": "6",
+                                "tabName": "Документация",
+                                "fixedName": "DOCS",
+                                "section": [
+                                    {
+                                        "sectionOrdinal": "1",
+                                        "sectionName": "Предоставление документации",
+                                        "fixedName": "DOCS_INFO"
+                                    },
+                                    {
+                                        "sectionOrdinal": "2",
+                                        "sectionName": "Файлы документации",
+                                        "fixedName": "DOCS_FILES"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "tabLevel": "LOT",
+                        "tab": {
+                            "tabOrdinal": "4",
+                            "tabName": "Формирование лота",
+                            "fixedName": "LOT_INFORMATION",
+                            "section": [
+                                {
+                                    "sectionOrdinal": "1",
+                                    "sectionName": "Общая информация о лоте",
+                                    "fixedName": "LOT_INFO"
+                                },
+                                {
+                                    "sectionOrdinal": "2",
+                                    "sectionName": "Информация о товаре, работе, услуге",
+                                    "fixedName": "LOT_GOODS"
+                                },
+                                {
+                                    "sectionOrdinal": "3",
+                                    "sectionName": "Место поставки",
+                                    "fixedName": "LOT_PLACE"
+                                },
+                                {
+                                    "sectionOrdinal": "4",
+                                    "sectionName": "Требования к обеспечению заявки",
+                                    "fixedName": "LOT_REQUIREMENTS"
+                                },
+                                {
+                                    "sectionOrdinal": "5",
+                                    "sectionName": "Требования к обеспечению исполнения договора",
+                                    "fixedName": "LOT_COMPLETING_REQUIREMENTS"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "tabLevel": "LOT_CUSTOMER",
+                        "tab": {
+                            "tabOrdinal": "5",
+                            "tabName": "Формирование сведений по заказчику",
+                            "fixedName": "LOT_CUSTOMER",
+                            "section": [
+                                {
+                                    "sectionOrdinal": "1",
+                                    "sectionName": "Общая информация по Заказчику",
+                                    "fixedName": "LOT_CUSTOMER_INFO"
+                                },
+                                {
+                                    "sectionOrdinal": "2",
+                                    "sectionName": "Информация о товаре, работе, услуге",
+                                    "fixedName": "LOT_CUSTOMER_GOODS"
+                                },
+                                {
+                                    "sectionOrdinal": "3",
+                                    "sectionName": "Место поставки",
+                                    "fixedName": "LOT_CUSTOMER_PLACE"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "lots": {
+                "lot": {
+                    "ordinalNumber": "1",
+                    "lotEditEnabled": "true",
+                    "lotData": {
+                        "subject": "Поставка нефтепродуктов (бензин, дизельное топливо) через АЗС с использованием электронных карт",
+                        "currency": {
+                            "code": "RUB",
+                            "digitalCode": "643",
+                            "name": "Российский рубль"
+                        },
+                        "initialSum": "1598825.47",
+                        "deliveryPlace": {
+                            "address": "В соответствии с требованиями закупочной документации,Приложение №2"
+                        },
+                        "lotItems": {
+                            "newCodes": "true",
+                            "lotItem": [
+                                {
+                                    "ordinalNumber": "1",
+                                    "okpd2": {
+                                        "code": "19.20.21.125",
+                                        "name": "Бензин автомобильный с октановым числом более 92, но не более 95 по исследовательскому методу экологического класса К5"
+                                    },
+                                    "okved2": {
+                                        "code": "19.20",
+                                        "name": "Производство нефтепродуктов"
+                                    },
+                                    "okei": {
+                                        "code": "112",
+                                        "name": "Литр; кубический дециметр"
+                                    },
+                                    "qty": "19200",
+                                    "additionalInfo": "Поставка нефтепродуктов (бензин, дизельное топливо) через АЗС с использованием электронных карт"
+                                },
+                                {
+                                    "ordinalNumber": "2",
+                                    "okpd2": {
+                                        "code": "19.20.21.345",
+                                        "name": "Топливо дизельное межсезонное экологического класса К5"
+                                    },
+                                    "okved2": {
+                                        "code": "19.20",
+                                        "name": "Производство нефтепродуктов"
+                                    },
+                                    "okei": {
+                                        "code": "112",
+                                        "name": "Литр; кубический дециметр"
+                                    },
+                                    "qty": "10161",
+                                    "additionalInfo": "Поставка нефтепродуктов (бензин, дизельное топливо) через АЗС с использованием электронных карт"
+                                }
+                            ]
+                        },
+                        "forSmallOrMiddle": "true",
+                        "excludePurchaseFromPlan": "false",
+                        "subcontractorsRequirement": "false",
+                        "ignoredPurchase": "false",
+                        "centralized": "false"
+                    },
+                    "deliveryPlaceIndication": "GL",
+                    "jointLotData": {
+                        "jointLot": "false"
+                    },
+                    "lotPlanInfo": {
+                        "planRegistrationNumber": "2220629035",
+                        "planGuid": "3d1b7e11-bc2d-4919-9be0-fb5cdcf06f7f",
+                        "positionNumber": "14",
+                        "lotPlanPosition": "COMMODITY",
+                        "positionGuid": "8d1d37c1-afc1-4c00-8c6e-3882cd4ef5ed"
+                    },
+                    "cancelled": "false"
+                }
+            },
+            "fz": "fz223"
+        }
+    ]
+}
