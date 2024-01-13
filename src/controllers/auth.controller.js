@@ -2,6 +2,7 @@ import db from "../models/index.js";
 import { uid } from "uid";
 import bcrypt from 'bcryptjs'
 import generateJwt from "../helpers/generateJwt.js";
+import { sendEmail } from "../helpers/sendEmail.js";
 
 const Users = db.users
 
@@ -38,6 +39,8 @@ class AuthController {
 
             const password = uid(16)
             console.log(password);
+
+            sendEmail('Пароль для использования Tender', "Ваш пароль для использования платформы Tender:\n"+password, email)
             
             const hashPassword = await bcrypt.hash(password, 5)
             let user = await Users.create({
