@@ -8,6 +8,7 @@ findRouter.post('/find', findController.findByTags)
 findRouter.post('/advancedfind223', findController.advancedFindByTagsFz223)
 findRouter.post('/advancedfind44', authMiddleware, findController.advancedFindByTagsFz44)
 findRouter.get('/:id', findController.findByRegNumber)
+findRouter.get('/innOrRegnumber/:id', findController.findByInnOrRegNumber)
 
 
 export default findRouter

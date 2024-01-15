@@ -40,4 +40,4 @@ export async function sendEmail(subject, text, email) {
     }
 
 }
-sendEmail('Пароль для использования Tender', "Ваш пароль для использования платформы Tender: 12345jhgdju3 ", "vbersenev72@gmail.com")
+// sendEmail('Пароль для использования Tender', "Ваш пароль для использования платформы Tender: 12345jhgdju3 ", "vbersenev72@gmail.com")

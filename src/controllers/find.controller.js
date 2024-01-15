@@ -22,10 +22,10 @@ class FindController {
             let result
             let count
 
-            if (JSON.stringify(tags) == JSON.stringify([""])) {
+            if (JSON.stringify(tags) == JSON.stringify("")) {
                 result = await collection.find().skip(start).limit(end - start + 1).toArray();
             } else {
-                result = await collection.find({ $text: { $search: tags.join(" ") } }, { score: { $meta: "textScore" } }).skip(start).limit(end - start + 1).toArray();
+                result = await collection.find({ $text: { $search: tags } }, { score: { $meta: "textScore" } }).skip(start).limit(end - start + 1).toArray();
 
             }
 
@@ -215,6 +215,36 @@ class FindController {
             if (!tender) return res.status(400).json({ message: 'not found' })
 
             return res.json({ purchaseProtocol: purchase, tender: [tender], explanation: [] })
+
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({ message: 'error', error })
+        }
+    }
+
+
+    async findByInnOrRegNumber(req, res) {
+        try {
+
+
+            const id = req.params.id
+
+            const client = await connectDB()
+            const db = client.db(process.env.MONGO_DB_NAME)
+            const collection = db.collection('tender')
+
+
+            const tender = await collection.findOne({
+                $or: [
+                    {"customer.mainInfo.inn": id},
+                    { registrationNumber: id }
+                ]
+            })
+
+
+            if (!tender) return res.status(400).json({ message: 'not found' })
+
+            return res.json({ tender: [tender] })
 
         } catch (error) {
             console.log(error);
