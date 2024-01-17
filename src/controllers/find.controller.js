@@ -26,7 +26,6 @@ class FindController {
                 result = await collection.find().skip(start).limit(end - start + 1).toArray();
             } else {
                 result = await collection.find({ $text: { $search: tags } }, { score: { $meta: "textScore" } }).skip(start).limit(end - start + 1).toArray();
-
             }
 
 
@@ -236,7 +235,7 @@ class FindController {
 
             const tender = await collection.findOne({
                 $or: [
-                    {"customer.mainInfo.inn": id},
+                    { "customer.mainInfo.inn": id },
                     { registrationNumber: id }
                 ]
             })
