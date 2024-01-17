@@ -236,7 +236,9 @@ class FindController {
             const tender = await collection.findOne({
                 $or: [
                     { "customer.mainInfo.inn": id },
-                    { registrationNumber: id }
+                    { registrationNumber: id },
+                    {'commonInfo.purchaseNumber': id},
+                    {'purchaseResponsibleInfo.responsibleOrgInfo.INN': id }
                 ]
             })
 
