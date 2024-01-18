@@ -6,6 +6,6 @@ const lkRouter = Router()
 
 lkRouter.post('/mytenders', authMiddleware, lkController.saveInMyTenders)
 lkRouter.delete('/mytenders/:id', authMiddleware, lkController.deleteFromMyTenders)
-lkRouter.get('/mytenders', authMiddleware, lkController.getMyTenders)
+lkRouter.get('/mytenders/:page', authMiddleware, lkController.getMyTenders)
 
 export default lkRouter

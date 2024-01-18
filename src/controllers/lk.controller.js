@@ -86,11 +86,17 @@ class LkController {
         try {
 
             const id = req.user.id
+            const page = req.params.page
+
+            const limit = 8
 
             const myTenders = await MyTenders.findAll({
                 where: {
                     user_id: id
-                }
+                },
+                limit: limit,
+                offset: (page - 1) * limit
+
             })
 
             return res.json({ message: myTenders })
