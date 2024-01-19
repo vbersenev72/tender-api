@@ -25,7 +25,7 @@ class FindController {
             if (JSON.stringify(tags) == JSON.stringify("")) {
                 result = await collection.find().skip(start).limit(end - start + 1).toArray();
             } else {
-                result = await collection.find({ $text: { $search: tags } }, { score: { $meta: "textScore" } }).skip(start).limit(end - start + 1).toArray();
+                result = await collection.find({ $text: { $search: tags } }, { score: { $meta: "text Score" } }).skip(start).limit(end - start + 1).toArray();
             }
 
 

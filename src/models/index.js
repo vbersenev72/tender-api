@@ -2,6 +2,8 @@ import tenderApiDb from "../../db/tenderApi.db.js";
 import Sequelize from "sequelize";
 import userModel from "./user.model.js";
 import myTenderModel from "./myTender.model.js";
+import autoSearchModel from "./autoSearch.model.js";
+import tagModel from "./tag.model.js";
 
 const sequelize = new Sequelize(tenderApiDb.DB, tenderApiDb.USER, tenderApiDb.PASSWORD, {
     host: tenderApiDb.HOST,
@@ -32,5 +34,7 @@ const sequelize = new Sequelize(tenderApiDb.DB, tenderApiDb.USER, tenderApiDb.PA
 
   db.users = userModel(sequelize, Sequelize);
   db.myTenders = myTenderModel(sequelize, Sequelize)
+  db.autoSearch = autoSearchModel(sequelize, Sequelize)
+  db.tag = tagModel(sequelize, Sequelize)
 
   export default db

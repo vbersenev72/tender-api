@@ -70,6 +70,9 @@ export default (sequelize, Sequelize) => {
         last_search: {
             type: Sequelize.TEXT
         },
+        push_user: {
+            type: Sequelize.TEXT
+        }
         
     });
 
