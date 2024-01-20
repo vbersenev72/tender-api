@@ -254,10 +254,21 @@ class TagController {
 
             const id = req.user.id
 
-            const tags = await Tag.findAll({
+            let tags = await Tag.findAll({
                 where: {
                     user_id: id
                 }
+            })
+
+            tags = tags.map(async (tag) => {
+                let tenders = await TendersData.findAll({
+                    where: {
+                        user_id: id,
+                        tag_id: tag.id
+                    }
+                })
+
+                return {...tag, count: tenders.length}
             })
 
             return res.json({ message: tags })
