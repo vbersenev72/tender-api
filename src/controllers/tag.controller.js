@@ -11,7 +11,7 @@ class TagController {
     async createTag(req, res) {
         try {
             const id = req.user.id
-            const { name, color,  } = req.body
+            const { name, color, } = req.body
 
             const candidateTag = await Tag.findOne({
                 where: {
@@ -111,7 +111,7 @@ class TagController {
 
             const limit = 8
 
-            const tenders = TendersData.findAll({
+            const tenders = await TendersData.findAll({
                 where: {
                     user_id: id,
                     tag_id: idTag
@@ -137,6 +137,8 @@ class TagController {
                     ]
                 })
 
+                if (tender == null) continue
+
                 result.push(tender)
             }
 
@@ -157,17 +159,15 @@ class TagController {
             const id = req.user.id
             const { idTag } = req.body
 
-            const limit = 8
 
-            const tenders = TendersData.findAll({
+            let tenders = await TendersData.findAll({
                 where: {
                     user_id: id,
                     tag_id: idTag
-                },
-                limit: limit,
-                offset: (page - 1) * limit
+                }
 
             })
+
 
             return res.json({ message: tenders.length })
 
