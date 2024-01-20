@@ -260,7 +260,7 @@ class TagController {
                 }
             })
 
-            tags = tags.map(async (tag) => {
+            tags = Promise.all(tags.map(async (tag) => {
                 let tenders = await TendersData.findAll({
                     where: {
                         user_id: id,
@@ -269,7 +269,7 @@ class TagController {
                 })
 
                 return {...tag, count: tenders.length}
-            })
+            }))
 
             return res.json({ message: tags })
 
