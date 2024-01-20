@@ -1,17 +1,17 @@
 export default (sequelize, Sequelize) => {
 
-    const TagModel = sequelize.define("tags", {
+    const tendersData = sequelize.define("tenders_data", {
         user_id: {
             type: Sequelize.INTEGER
         },
-        tag_name: {
+        reg_num: {
             type: Sequelize.TEXT
         },
-        tag_color: {
-            type: Sequelize.TEXT
+        tag_id: {
+            type: Sequelize.INTEGER
         }
 
     });
 
-    return TagModel;
+    return tendersData;
 };
