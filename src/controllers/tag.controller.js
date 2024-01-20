@@ -260,21 +260,10 @@ class TagController {
                 }
             })
 
-            const result = []
 
-            tags = Promise.all(tags.forEach(async (tag) => {
-                let tenders = await TendersData.findAll({
-                    where: {
-                        user_id: id,
-                        tag_id: tag.id
-                    }
-                })
 
-                const newTag = {...tag, count: tenders.length}
-                result.push(newTag)
-            }))
 
-            return res.json({ message: result })
+            return res.json({ message: tags })
 
 
         } catch (error) {
