@@ -72,7 +72,7 @@ class TagController {
 
         try {
             const id = req.user.id
-            const { name, color, idTag } = req.body
+            const { name, idTag } = req.body
 
             const findTag = await Tag.findOne({
                 where: {
@@ -85,7 +85,6 @@ class TagController {
 
             const updateTag = await Tag.update({
                 tag_name: name,
-                tag_color: color,
             }, {
                 where: {
                     user_id: id,
