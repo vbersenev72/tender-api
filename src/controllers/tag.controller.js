@@ -276,7 +276,7 @@ class TagController {
             let tag = await Tag.findOne({
                 where: {
                     user_id: id,
-                    id: Number(tagId)
+                    id: parseInt(tagId)
                 }
             })
 
