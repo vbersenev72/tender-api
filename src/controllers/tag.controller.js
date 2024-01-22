@@ -253,7 +253,7 @@ class TagController {
 
             let tags = await Tag.findAll({
                 where: {
-                    user_id: id
+                    user_id: id,
                 }
             })
 
