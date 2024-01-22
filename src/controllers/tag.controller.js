@@ -194,7 +194,6 @@ class TagController {
         const deleteBeforeTags = await TendersData.destroy({
             where: {
                 user_id: id,
-                tag_id: Number(idTag),
                 reg_num: String(regNum)
             }
         })
