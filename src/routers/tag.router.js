@@ -7,6 +7,7 @@ const tagRouter = Router()
 tagRouter.post('/create', authMiddleware, tagController.createTag)
 tagRouter.post('/edit', authMiddleware, tagController.editTag)
 tagRouter.delete('/delete/:id', authMiddleware, tagController.deleteTag)
+tagRouter.get('/:id', authMiddleware, tagController.getTagById)
 tagRouter.get('/getall', authMiddleware, tagController.getAllTags)
 
 tagRouter.post('/addtotender', authMiddleware, tagController.addTagToTender)

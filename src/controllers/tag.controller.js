@@ -269,6 +269,29 @@ class TagController {
         }
     }
 
+    async getTagById(req, res) {
+        try {
+
+            const id = req.user.id
+            const tagId = req.params.id
+
+            let tag = await Tag.findOne({
+                where: {
+                    user_id: id,
+                    id: Number(tagId)
+                }
+            })
+
+
+            return res.json({ message: tag })
+
+
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({ message: 'Произошла ошибка' })
+        }
+    }
+
 }
 
 
