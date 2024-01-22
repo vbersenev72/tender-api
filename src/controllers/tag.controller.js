@@ -200,8 +200,6 @@ class TagController {
         })
 
 
-        if (findAddedTag) return res.status(400).json({ message: 'Можно добавить только одну метку' })
-
 
         const addTag = TendersData.create({
             user_id: id,
