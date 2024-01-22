@@ -191,13 +191,14 @@ class TagController {
 
         if (!findTag) return res.status(400).json({ message: 'Метки не существует' })
 
-        const findAddedTag = await TendersData.findOne({
+        const deleteBeforeTags = await TendersData.destroy({
             where: {
                 user_id: id,
                 tag_id: Number(idTag),
                 reg_num: String(regNum)
             }
         })
+
 
         if (findAddedTag) return res.status(400).json({ message: 'Можно добавить только одну метку' })
 
