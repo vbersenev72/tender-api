@@ -273,6 +273,8 @@ class TagController {
             const id = req.user.id
             const tagId = req.params.id
 
+            console.log('tag ID '+tagId);
+
             let tag = await Tag.findOne({
                 where: {
                     user_id: id,
