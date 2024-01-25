@@ -7,5 +7,9 @@ const lkRouter = Router()
 lkRouter.post('/mytenders', authMiddleware, lkController.saveInMyTenders)
 lkRouter.delete('/mytenders/:id', authMiddleware, lkController.deleteFromMyTenders)
 lkRouter.get('/mytenders/:page', authMiddleware, lkController.getMyTenders)
+lkRouter.post('/changepass', authMiddleware, lkController.changePassword)
+lkRouter.get('/profile', authMiddleware, lkController.getProfileInfo)
+lkRouter.post('/profile', authMiddleware, lkController.editProlife)
+
 
 export default lkRouter

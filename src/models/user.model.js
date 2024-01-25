@@ -33,6 +33,18 @@ export default (sequelize, Sequelize) => {
         },
         register_date: {
             type: Sequelize.TEXT
+        },
+        company_name: {
+            type: Sequelize.TEXT
+        },
+        company_inn: {
+            type: Sequelize.TEXT
+        },
+        company_address: {
+            type: Sequelize.TEXT
+        },
+        post_address: {
+            type: Sequelize.TEXT
         }
         /// Еще чета добавить
         

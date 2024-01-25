@@ -1,6 +1,8 @@
 import connectDB from "../../db/mongoCLient.js";
 import { config } from "dotenv";
 import db from "../models/index.js";
+import bcrypt from 'bcryptjs'
+import { Op } from "sequelize";
 
 config()
 
@@ -104,6 +106,84 @@ class LkController {
         } catch (error) {
             console.log(error);
             return res.status(400).json({ message: "error", error })
+        }
+    }
+
+
+    async editProlife(req, res) {
+        try {
+
+            const id = req.user.id
+
+            const { name, phone, email, companyName, companyInn, companyAddress, postAddress } = req.body
+
+
+            const editProlife = await Users.update({
+                name: name,
+                phone: phone,
+                email: email,
+                company_name: companyName,
+                company_inn: companyInn,
+                company_address: companyAddress,
+                post_address: postAddress,
+            },{
+                where: {
+                    id: id
+                }
+            })
+
+            return res.json({message: 'Профиль обновлён'})
+
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({ message: "Ошибка сохранения. Попробуйте позже", error })
+        }
+    }
+
+
+    async changePassword(req, res) {
+        try {
+
+            const id = req.use.id
+            const {oldPassword, newPassword, copyNewPassword} = req.body
+
+            if (newPassword == copyNewPassword) {
+                return res.status(400).json({message: 'Пароли не совпадают'})
+            }
+
+            const candidate = await Users.findOne({ where: { id: id } })
+
+            const isPassValid = bcrypt.compareSync(oldPassword, candidate.password)
+            if (!isPassValid) {
+                return res.status(400).json({message: "Пароль не верный"})
+            }
+
+            const hashPassword = await bcrypt.hash(newPassword, 5)
+
+            return res.json({message: 'Пароль изменён'})
+            
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({ message: "Ошибка. Попробуйте позже", error })
+        }
+    }
+
+    async getProfileInfo(req, res) {
+        try {
+
+            const id = req.user.id
+
+            const user = await Users.findOne({
+                where: {
+                    id: id
+                }
+            })
+
+            return res.json({message: user})
+            
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({ message: "Ошибка. Попробуйте позже", error })
         }
     }
 
