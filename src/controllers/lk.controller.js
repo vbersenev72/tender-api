@@ -150,7 +150,7 @@ class LkController {
             const id = req.user.id
             const {oldPassword, newPassword, copyNewPassword} = req.body
 
-            if (newPassword == copyNewPassword) {
+            if (newPassword != copyNewPassword) {
                 return res.status(400).json({message: 'Пароли не совпадают'})
             }
 
