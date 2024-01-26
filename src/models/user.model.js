@@ -21,7 +21,7 @@ export default (sequelize, Sequelize) => {
             defaultValue: 'test',
         },
         role: {
-            type: Sequelize.TEXT, 
+            type: Sequelize.TEXT,
             defaultValue: 'user',
         },
         balance: {
@@ -29,7 +29,7 @@ export default (sequelize, Sequelize) => {
             defaultValue: "0"
         },
         endtime: {
-            type: Sequelize.TEXT, 
+            type: Sequelize.TEXT,
         },
         register_date: {
             type: Sequelize.TEXT
@@ -45,9 +45,15 @@ export default (sequelize, Sequelize) => {
         },
         post_address: {
             type: Sequelize.TEXT
-        }
+        },
+        email_notif: {
+            type: Sequelize.BOOLEAN
+        },
+        push_notif: {
+            type: Sequelize.BOOLEAN
+        },
         /// Еще чета добавить
-        
+
     });
 
     return Users;

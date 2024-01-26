@@ -115,7 +115,7 @@ class LkController {
 
             const id = req.user.id
 
-            const { name, phone, email, companyName, companyInn, companyAddress, postAddress } = req.body
+            const { name, phone, email, companyName, companyInn, companyAddress, postAddress, pushNotif, emailNotif } = req.body
 
 
             const editProlife = await Users.update({
@@ -126,6 +126,8 @@ class LkController {
                 company_inn: companyInn,
                 company_address: companyAddress,
                 post_address: postAddress,
+                email_notif: emailNotif,
+                push_notif: pushNotif
             },{
                 where: {
                     id: id
@@ -161,7 +163,7 @@ class LkController {
             const hashPassword = await bcrypt.hash(newPassword, 5)
 
             return res.json({message: 'Пароль изменён'})
-            
+
         } catch (error) {
             console.log(error);
             return res.status(400).json({ message: "Ошибка. Попробуйте позже", error })
@@ -180,7 +182,7 @@ class LkController {
             })
 
             return res.json({message: user})
-            
+
         } catch (error) {
             console.log(error);
             return res.status(400).json({ message: "Ошибка. Попробуйте позже", error })
