@@ -3,6 +3,7 @@ import { config } from "dotenv";
 import db from "../models/index.js";
 import bcrypt from 'bcryptjs'
 import { Op } from "sequelize";
+import generateJwt from "../helpers/generateJwt.js";
 
 config()
 
@@ -146,7 +147,7 @@ class LkController {
     async changePassword(req, res) {
         try {
 
-            const id = req.use.id
+            const id = req.user.id
             const {oldPassword, newPassword, copyNewPassword} = req.body
 
             if (newPassword == copyNewPassword) {
@@ -161,6 +162,16 @@ class LkController {
             }
 
             const hashPassword = await bcrypt.hash(newPassword, 5)
+
+            let user = await Users.create({
+                password: hashPassword,
+            }, {
+                where: {
+                    id: id
+                }
+            })
+
+            const token = generateJwt(id)
 
             return res.json({message: 'Пароль изменён'})
 
