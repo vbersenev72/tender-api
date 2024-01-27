@@ -72,8 +72,12 @@ export default (sequelize, Sequelize) => {
         },
         push_user: {
             type: Sequelize.TEXT
+        },
+        excel_result: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false,
         }
-        
+
     });
 
     return autoSearch;
