@@ -39,6 +39,6 @@ const sequelize = new Sequelize(tenderApiDb.DB, tenderApiDb.USER, tenderApiDb.PA
   db.autoSearch = autoSearchModel(sequelize, Sequelize)
   db.tag = tagModel(sequelize, Sequelize)
   db.tendersData = tendersDataModel(sequelize, Sequelize)
-  db.autoSearchResultModel = autoSearchResultModel(sequelize, Sequelize)
+  db.autoSearchResult = autoSearchResultModel(sequelize, Sequelize)
 
   export default db
