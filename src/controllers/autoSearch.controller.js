@@ -1,4 +1,8 @@
 import db from '../models/index.js'
+import connectDB from '../../db/mongoCLient.js'
+import { config } from 'dotenv'
+
+config()
 
 const AutoSearch = db.autoSearch
 const AutoSearchResult = db.autoSearchResult
@@ -36,7 +40,7 @@ class AutoSearchController {
                 }
             })
 
-            if (candidate) return res.status(400).json({message: 'Автопоиск с таким именем уже существует!'})
+            if (candidate) return res.status(400).json({ message: 'Автопоиск с таким именем уже существует!' })
 
             const createAutoSearch = await AutoSearch.create({
                 user_id: id,
@@ -64,7 +68,7 @@ class AutoSearchController {
 
             })
 
-            return res.json({message: 'Автопоиск успешно задан!'})
+            return res.json({ message: 'Автопоиск успешно задан!' })
 
         } catch (error) {
             console.log(error);
@@ -106,7 +110,7 @@ class AutoSearchController {
                 }
             })
 
-            if (!candidate) return res.status(400).json({message: 'Автопоиск не существует!'})
+            if (!candidate) return res.status(400).json({ message: 'Автопоиск не существует!' })
 
             const updateAutoSearch = await AutoSearch.update({
                 name: name,
@@ -138,6 +142,9 @@ class AutoSearchController {
                 }
             })
 
+
+            return res.json({message: 'Автопоиск изменён!'})
+
         } catch (error) {
             console.log(error);
             return res.status(400).json({ message: 'Произошла ошибка, попробуйте позже' })
@@ -155,7 +162,7 @@ class AutoSearchController {
                     id: autoSearchId,
                 }
             })
-            if (!candidate) return res.status(400).json({message: 'Автопоиск не существует!'})
+            if (!candidate) return res.status(400).json({ message: 'Автопоиск не существует!' })
 
             const deleteAutoSearch = await AutoSearch.destroy({
                 where: {
@@ -164,7 +171,7 @@ class AutoSearchController {
                 }
             })
 
-            return res.json({message: 'Автопоиск удалён!'})
+            return res.json({ message: 'Автопоиск удалён!' })
 
         } catch (error) {
             console.log(error);
@@ -185,9 +192,9 @@ class AutoSearchController {
                 }
             })
 
-            if (!autoSearch) return res.status(400).json({message: 'Автопоиск не найден!'})
+            if (!autoSearch) return res.status(400).json({ message: 'Автопоиск не найден!' })
 
-            return res.json({message: autoSearch})
+            return res.json({ message: autoSearch })
 
         } catch (error) {
             console.log(error);
@@ -196,13 +203,76 @@ class AutoSearchController {
     }
 
 
+    async getAllAutoSearch(req, res) {
+        try {
+
+            const id = req.user.id
+
+            const autoSearch = await AutoSearch.findAll({
+                where: {
+                    user_id: id,
+                }
+            })
+
+            return res.json({ message: autoSearch })
+
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({ message: 'Произошла ошибка, попробуйте позже' })
+        }
+    }
+
+
+
     async getResultAutoSearch(req, res) {
         try {
 
             const id = req.user.id
             const autoSearchId = req.params.id
+            const page = req.query.page
 
-            
+            const limit = 8
+
+            const candidate = await AutoSearch.findOne({
+                where: {
+                    id: autoSearchId,
+                }
+            })
+            if (!candidate) return res.status(400).json({ message: 'Автопоиск не существует!' })
+
+
+            const tenders = await AutoSearchResult.findAll({
+                where: {
+                    user_id: id,
+                    autosearch_id: autoSearchId,
+                },
+                limit: limit,
+                offset: (page - 1) * limit
+            })
+
+            const result = []
+
+            const client = await connectDB()
+            const db = client.db(process.env.MONGO_DB_NAME)
+            const collection = db.collection('tender')
+
+            for (let i = 0; i < tenders.length; i++) {
+                const element = tenders[i];
+
+                const tender = await collection.findOne({
+                    $or: [
+                        { "commonInfo.purchaseNumber": String(element.reg_num) },
+                        { registrationNumber: String(element.reg_num) }
+                    ]
+                })
+
+                if (tender == null) continue
+
+                result.push(tender)
+            }
+
+            return res.json({ message: result })
+
 
         } catch (error) {
             console.log(error);
@@ -215,7 +285,16 @@ class AutoSearchController {
 
             const id = req.user.id
             const autoSearchId = req.params.id
-            
+
+            const tenders = await AutoSearchResult.findAll({
+                where: {
+                    user_id: id,
+                    autosearch_id: autoSearchId,
+                },
+            })
+
+            return res.json({ message: tenders.length })
+
         } catch (error) {
             console.log(error);
             return res.status(400).json({ message: 'Произошла ошибка, попробуйте позже' })
@@ -227,7 +306,52 @@ class AutoSearchController {
         try {
 
             const id = req.user.id
-            const autoSearchId = req.params.page
+            const autoSearchId = req.params.id
+
+            const page = req.query.page
+
+            const limit = 8
+
+            const candidate = await AutoSearch.findOne({
+                where: {
+                    id: autoSearchId,
+                }
+            })
+            if (!candidate) return res.status(400).json({ message: 'Автопоиск не существует!' })
+
+
+            const tenders = await AutoSearchResult.findAll({
+                where: {
+                    user_id: id,
+                    autosearch_id: autoSearchId,
+                    isRead: true
+                },
+                limit: limit,
+                offset: (page - 1) * limit
+            })
+
+            const result = []
+
+            const client = await connectDB()
+            const db = client.db(process.env.MONGO_DB_NAME)
+            const collection = db.collection('tender')
+
+            for (let i = 0; i < tenders.length; i++) {
+                const element = tenders[i];
+
+                const tender = await collection.findOne({
+                    $or: [
+                        { "commonInfo.purchaseNumber": String(element.reg_num) },
+                        { registrationNumber: String(element.reg_num) }
+                    ]
+                })
+
+                if (tender == null) continue
+
+                result.push(tender)
+            }
+
+            return res.json({ message: result })
 
 
         } catch (error) {
@@ -243,6 +367,26 @@ class AutoSearchController {
             const id = req.user.id
             const autoSearchResultId = req.params.id
 
+            const candidate = await AutoSearchResult.findOne({
+                where: {
+                    id: autoSearchResultId,
+                    user_id: id
+                }
+            })
+            if (!candidate) return res.status(400).json({ message: 'Автопоиск не существует!' })
+
+            const createReadMark = await AutoSearchResult.update({
+                isRead: true
+            }, {
+                where: {
+                    user_id: id,
+                    id: autoSearchResultId
+                }
+            })
+
+            return res.json({message: 'Отмечено как прочитанное!'})
+
+
 
         } catch (error) {
             console.log(error);
@@ -250,13 +394,6 @@ class AutoSearchController {
         }
     }
 
-
-
-
-
-
-
-
-
-
 }
+
+export default new AutoSearchController()
