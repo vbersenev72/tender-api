@@ -215,7 +215,7 @@ class TagController {
         try {
 
             const id = req.user.id
-            const { regNum } = req.params.id
+            const regNum = req.params.id
 
 
             const findAddedTag = await TendersData.findOne({
