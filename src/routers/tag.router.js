@@ -12,6 +12,7 @@ tagRouter.get('/:id', authMiddleware, tagController.getTagById)
 tagRouter.post('/addtotender', authMiddleware, tagController.addTagToTender)
 tagRouter.delete('/deletefromtender/:id', authMiddleware, tagController.deleteTagFromTender)
 tagRouter.post('/gettenders', authMiddleware, tagController.getTendersByTag)
+tagRouter.post('/gettenderslist', authMiddleware, tagController.getTendersListByTag)
 tagRouter.post('/getcounttenders', authMiddleware, tagController.getCountTendersByTag)
 
 

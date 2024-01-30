@@ -152,6 +152,31 @@ class TagController {
 
     }
 
+    async getTendersListByTag(req, res) {
+        try {
+
+            const id = req.user.id
+            const { idTag } = req.body
+
+            const tenders = await TendersData.findAll({
+                where: {
+                    user_id: id,
+                    tag_id: idTag
+                }
+            })
+
+         
+
+            return res.json({ message: tenders })
+
+
+
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({ message: 'Произошла ошибка' })
+        }
+    }
+
     async getCountTendersByTag(req, res) {
         try {
 
