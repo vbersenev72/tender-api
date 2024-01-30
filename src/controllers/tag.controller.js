@@ -212,39 +212,37 @@ class TagController {
     }
 
     async deleteTagFromTender(req, res) {
-        const id = req.user.id
-        const { idTag, regNum } = req.body
+        try {
 
-        const findTag = await Tag.findOne({
-            where: {
-                user_id: id,
-                id: Number(idTag)
-            }
-        })
-
-        if (!findTag) return res.status(400).json({ message: 'Метки не существует' })
-
-        const findAddedTag = await TendersData.findOne({
-            where: {
-                user_id: id,
-                tag_id: Number(idTag),
-                reg_num: String(regNum)
-            }
-        })
-
-        if (!findAddedTag) return res.status(400).json({ message: 'Метка не добавлена' })
+            const id = req.user.id
+            const { regNum } = req.params.id
 
 
-        const deleteTagFromTender = TendersData.destroy({
-            where: {
-                user_id: id,
-                tag_id: Number(idTag),
-                reg_num: String(regNum)
-            }
-        })
+            const findAddedTag = await TendersData.findOne({
+                where: {
+                    user_id: id,
+                    reg_num: String(regNum)
+                }
+            })
 
-        return res.json({ message: 'Метка удалена' })
+            if (!findAddedTag) return res.status(400).json({ message: 'Метка не добавлена' })
+
+
+            const deleteTagFromTender = TendersData.destroy({
+                where: {
+                    user_id: id,
+                    reg_num: String(regNum)
+                }
+            })
+
+            return res.json({ message: 'Метка удалена' })
+
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({ message: 'Произошла ошибка' })
+        }
     }
+
 
     async getAllTags(req, res) {
         try {
@@ -273,7 +271,7 @@ class TagController {
             const id = req.user.id
             const tagId = req.params.id
 
-            console.log('tag ID '+tagId);
+            console.log('tag ID ' + tagId);
 
             let tag = await Tag.findOne({
                 where: {
