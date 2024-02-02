@@ -380,7 +380,7 @@ class AutoSearchController {
             }, {
                 where: {
                     user_id: id,
-                    reg_num: regNum,d
+                    reg_num: regNum,
                 }
             })
 
