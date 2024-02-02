@@ -291,6 +291,7 @@ class AutoSearchController {
                 where: {
                     user_id: id,
                     autosearch_id: autoSearchId,
+                    isRead: false
                 },
             })
 
