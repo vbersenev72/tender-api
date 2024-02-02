@@ -365,11 +365,11 @@ class AutoSearchController {
         try {
 
             const id = req.user.id
-            const autoSearchResultId = req.params.id
+            const regNum = req.params.id
 
             const candidate = await AutoSearchResult.findOne({
                 where: {
-                    id: autoSearchResultId,
+                    reg_num: regNum,
                     user_id: id
                 }
             })
@@ -380,7 +380,7 @@ class AutoSearchController {
             }, {
                 where: {
                     user_id: id,
-                    id: autoSearchResultId
+                    reg_num: regNum,d
                 }
             })
 
