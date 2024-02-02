@@ -14,7 +14,7 @@ autoSearchRouter.get('/autosearches/all', authMiddleware, autoSearchController.g
 autoSearchRouter.get('/getresult/:id', authMiddleware, autoSearchController.getResultAutoSearch)
 autoSearchRouter.get('/count/:id', authMiddleware, autoSearchController.getCountResultAutoSearch)
 autoSearchRouter.get('/getresultisread/:id', authMiddleware, autoSearchController.getResultIsRead)
-autoSearchRouter.post('/read', authMiddleware, autoSearchController.isReadMark)
+autoSearchRouter.post('/read/:id', authMiddleware, autoSearchController.isReadMark)
 
 
 export default autoSearchRouter
