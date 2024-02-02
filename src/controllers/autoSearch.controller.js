@@ -245,6 +245,7 @@ class AutoSearchController {
                 where: {
                     user_id: id,
                     autosearch_id: autoSearchId,
+                    isRead: false
                 },
                 limit: limit,
                 offset: (page - 1) * limit
