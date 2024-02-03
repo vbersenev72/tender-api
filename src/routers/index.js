@@ -4,6 +4,7 @@ import findRouter from "./find.router.js";
 import lkRouter from "./lk.router.js";
 import tagRouter from "./tag.router.js";
 import autoSearchRouter from "./autoSearch.router.js";
+import reportExcelRouter from "./reportExcel.router.js";
 
 const router = Router()
 
@@ -12,5 +13,6 @@ router.use('/find', findRouter)
 router.use('/lk', lkRouter)
 router.use('/tags', tagRouter)
 router.use('/autosearch', autoSearchRouter)
+router.use('/report', reportExcelRouter)
 
 export default router
