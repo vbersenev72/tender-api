@@ -294,13 +294,66 @@ class FindController {
             }
 
             if (priceFrom == "" && priceTo != "") {
+                query.push({
+                    $or: [
+                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': { $lte: priceTo } },
+                        { 'lots.lot.lotData.initialSum': { $lte: priceTo } }
+                    ]
+                })
+            }
 
+            if (priceFrom != "" && priceTo == "") {
+                query.push({
+                    $or: [
+                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': { $gte: priceFrom } },
+                        { 'lots.lot.lotData.initialSum': { $gte: priceFrom } }
+                    ]
+                })
+            }
+
+            if (priceFrom != "" && priceTo != "") {
+                query.push({
+                    $and: [
+                        {
+                            $or: [
+                                { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': { $lte: priceTo } },
+                                { 'lots.lot.lotData.initialSum': { $lte: priceTo } }
+                            ]
+                        },
+                        {
+                            $or: [
+                                { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': { $gte: priceFrom } },
+                                { 'lots.lot.lotData.initialSum': { $gte: priceFrom } }
+                            ]
+                        }
+                    ]
+                })
+            }
+
+            if (source != "") {
+                query.push({
+                    $or: [
+                        { 'urlEIS': { $regex: source, $options: 'i' } },
+                        { "commonInfo.href": { $regex: source, $options: 'i' } }
+                    ]
+                })
             }
 
 
+            if (okpd2 != '') {
+                query.push({
+                    $or: [
+                        {'lots.lot.lotData.lotItems.lotItem.okpd2.code': { $regex: '^' + okpd2, $options: 'i' } },
+                        {'lots.lot.lotData.lotItems.lotItem.okpd2.code': { $regex: '^' + okpd2, $options: 'i' } }
+                    ]
+                })
+            }
 
-
-
+            if (fz != '') {
+                query.push({
+                    fz: fz
+                })
+            }
 
 
 
