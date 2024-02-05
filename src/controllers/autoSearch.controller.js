@@ -151,6 +151,35 @@ class AutoSearchController {
         }
     }
 
+    async editName(req, res) {
+        const id = req.user.id
+            let {
+                name,
+                autoSearchId
+            } = req.body
+
+            const candidate = await AutoSearch.findOne({
+                where: {
+                    id: autoSearchId,
+                }
+            })
+
+            if (!candidate) return res.status(400).json({ message: 'Автопоиск не существует!' })
+
+            const updateAutoSearch = await AutoSearch.update({
+                name: name,
+
+            }, {
+                where: {
+                    user_id: id,
+                    id: autoSearchId
+                }
+            })
+
+
+            return res.json({message: 'Автопоиск изменён!'})
+    }
+
     async deleteAutoSearch(req, res) {
         try {
 

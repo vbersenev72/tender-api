@@ -343,8 +343,8 @@ class FindController {
             if (okpd2 != '') {
                 query.push({
                     $or: [
-                        {'lots.lot.lotData.lotItems.lotItem.okpd2.code': { $regex: '^' + okpd2, $options: 'i' } },
-                        {'lots.lot.lotData.lotItems.lotItem.okpd2.code': { $regex: '^' + okpd2, $options: 'i' } }
+                        { 'lots.lot.lotData.lotItems.lotItem.okpd2.code': { $regex: '^' + okpd2, $options: 'i' } },
+                        { 'lots.lot.lotData.lotItems.lotItem.okpd2.code': { $regex: '^' + okpd2, $options: 'i' } }
                     ]
                 })
             }
@@ -541,13 +541,11 @@ class FindController {
                 ]
             })
 
-            const purchase = await purchaseProtocol.find({ fz: "fz223", "purchaseInfo.purchaseNoticeNumber": id }).toArray()
-
 
 
             if (!tender) return res.status(400).json({ message: 'not found' })
 
-            return res.json({ purchaseProtocol: purchase, tender: [tender], explanation: [] })
+            return res.json({ purchaseProtocol: [], tender: [tender], explanation: [] })
 
         } catch (error) {
             console.log(error);

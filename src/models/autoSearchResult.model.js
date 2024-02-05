@@ -1,6 +1,6 @@
 export default (sequelize, Sequelize) => {
 
-    const MyTenders = sequelize.define("auto_search_result", {
+    const autoSearchResult = sequelize.define("auto_search_result", {
         user_id: {
             type: Sequelize.INTEGER
         },
@@ -18,5 +18,5 @@ export default (sequelize, Sequelize) => {
 
     });
 
-    return MyTenders;
+    return autoSearchResult;
 };

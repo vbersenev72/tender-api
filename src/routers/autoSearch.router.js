@@ -8,6 +8,7 @@ const autoSearchRouter = Router()
 
 autoSearchRouter.post('/create', authMiddleware, autoSearchController.createAutoSearch)
 autoSearchRouter.post('/edit', authMiddleware, autoSearchController.editAutoSearch)
+autoSearchRouter.post('/editname', authMiddleware, autoSearchController.editName)
 autoSearchRouter.delete('/delete/:id', authMiddleware, autoSearchController.deleteAutoSearch)
 autoSearchRouter.get('/:id', authMiddleware, autoSearchController.getAutoSearch)
 autoSearchRouter.get('/autosearches/all', authMiddleware, autoSearchController.getAllAutoSearch)

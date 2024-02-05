@@ -5,73 +5,96 @@ export default (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
         },
         name: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         tags: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         stopTags: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         publicDateFrom: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         publicDateTo: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         startDateFrom: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         startDateTo: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         endDateFrom: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         endDateTo: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         fz: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         region: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         tenderNum: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         customerName: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         stopCustomerName: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: 'false'
         },
         inn: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         priceFrom: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         priceTo: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         enablePrice: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         source: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         enableSource: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         okpd2: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         last_search: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
         push_user: {
-            type: Sequelize.TEXT
+            type: Sequelize.TEXT,
+            defaultValue: ''
         },
 
 
