@@ -143,7 +143,7 @@ class AutoSearchController {
             })
 
 
-            return res.json({message: 'Автопоиск изменён!'})
+            return res.json({ message: 'Автопоиск изменён!' })
 
         } catch (error) {
             console.log(error);
@@ -153,31 +153,31 @@ class AutoSearchController {
 
     async editName(req, res) {
         const id = req.user.id
-            let {
-                name,
-                autoSearchId
-            } = req.body
+        let {
+            name,
+            autoSearchId
+        } = req.body
 
-            const candidate = await AutoSearch.findOne({
-                where: {
-                    id: autoSearchId,
-                }
-            })
+        const candidate = await AutoSearch.findOne({
+            where: {
+                id: autoSearchId,
+            }
+        })
 
-            if (!candidate) return res.status(400).json({ message: 'Автопоиск не существует!' })
+        if (!candidate) return res.status(400).json({ message: 'Автопоиск не существует!' })
 
-            const updateAutoSearch = await AutoSearch.update({
-                name: name,
+        const updateAutoSearch = await AutoSearch.update({
+            name: name,
 
-            }, {
-                where: {
-                    user_id: id,
-                    id: autoSearchId
-                }
-            })
+        }, {
+            where: {
+                user_id: id,
+                id: autoSearchId
+            }
+        })
 
 
-            return res.json({message: 'Автопоиск изменён!'})
+        return res.json({ message: 'Автопоиск изменён!' })
     }
 
     async deleteAutoSearch(req, res) {
@@ -269,6 +269,14 @@ class AutoSearchController {
             })
             if (!candidate) return res.status(400).json({ message: 'Автопоиск не существует!' })
 
+            const count = await AutoSearchResult.findAll({
+                where: {
+                    user_id: id,
+                    autosearch_id: autoSearchId,
+                    isRead: false
+                },
+            })
+            const totalItems = count.length
 
             const tenders = await AutoSearchResult.findAll({
                 where: {
@@ -277,7 +285,7 @@ class AutoSearchController {
                     isRead: false
                 },
                 limit: limit,
-                offset: (page - 1) * limit
+                offset: (totalItems - page * limit),
             })
 
             const result = []
@@ -415,7 +423,7 @@ class AutoSearchController {
                 }
             })
 
-            return res.json({message: 'Отмечено как прочитанное!'})
+            return res.json({ message: 'Отмечено как прочитанное!' })
 
 
 
