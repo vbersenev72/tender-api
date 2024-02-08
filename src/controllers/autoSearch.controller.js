@@ -200,6 +200,13 @@ class AutoSearchController {
                 }
             })
 
+            const deleteAutoSearchResult = await AutoSearchResult.destroy({
+                where: {
+                    user_id: id,
+                    autosearch_id: autoSearchId
+                }
+            })
+
             return res.json({ message: 'Автопоиск удалён!' })
 
         } catch (error) {
