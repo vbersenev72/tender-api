@@ -22,7 +22,7 @@ app.use(express.static('files'))
 
 const start = async () => {
     try {
-        
+        AutoSearch()
         app.listen(PORT, () => console.log(`started on ${PORT}`))
 
         cron.schedule('0 0 */1 * *', () => {

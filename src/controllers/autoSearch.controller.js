@@ -98,7 +98,7 @@ class AutoSearchController {
                 methodDeterminingSupplier,
                 source, enableSource,
                 okpd2,
-                name,
+
 
                 autoSearchId
 
@@ -113,7 +113,7 @@ class AutoSearchController {
             if (!candidate) return res.status(400).json({ message: 'Автопоиск не существует!' })
 
             const updateAutoSearch = await AutoSearch.update({
-                name: name,
+
                 tags: tags,
                 stopTags,
                 publicDateFrom: publicDateFrom,
@@ -285,15 +285,31 @@ class AutoSearchController {
             })
             const totalItems = count.length
 
-            const tenders = await AutoSearchResult.findAll({
-                where: {
-                    user_id: id,
-                    autosearch_id: autoSearchId,
-                    isRead: false
-                },
-                limit: limit,
-                offset: (totalItems - page * limit),
-            })
+            let tenders
+
+            if (count > 9) {
+                tenders = await AutoSearchResult.findAll({
+                    where: {
+                        user_id: id,
+                        autosearch_id: autoSearchId,
+                        isRead: false
+                    },
+                    limit: limit,
+                    offset: (totalItems - page * limit),
+                })
+
+            } else {
+                tenders = await AutoSearchResult.findAll({
+                    where: {
+                        user_id: id,
+                        autosearch_id: autoSearchId,
+                        isRead: false
+                    },
+                    limit: limit,
+                    offset: (page - 1) * limit,
+                })
+            }
+
 
             const result = []
 
