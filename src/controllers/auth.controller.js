@@ -96,6 +96,11 @@ class AuthController {
             const id = req.user.id
 
             const user = await Users.findOne({ where: { id: id } })
+
+            if (!user) {
+                return res.status(401).json({message: 'Вы не авторизованы!'})
+            }
+
             const token = generateJwt(id)
             return res.json({
                 token,
