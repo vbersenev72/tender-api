@@ -91,8 +91,8 @@ export const AutoSearch = async () => {
                         },
                         {
                             $or: [
-                                { 'publicationDateTime': { $lte: new Date(autoSearchParams.publicDateTo).toISOString() } },
-                                { 'commonInfo.publishDTInEIS': { $lte: new Date(autoSearchParams.publicDateTo).toISOString() } }
+                                { 'publicationDateTime': { $lte: new Date(autoSearchParams.publicDateTo) } },
+                                { 'commonInfo.publishDTInEIS': { $lte: new Date(autoSearchParams.publicDateTo) } }
                             ]
                         }
 
@@ -124,12 +124,12 @@ export const AutoSearch = async () => {
                     $and: [
                         {
                             $or: [
-                                { 'publicationDateTime': { $lte: new Date(autoSearchParams.startDateTo).toISOString() } },
-                                { 'notificationInfo.procedureInfo.collectingInfo.startDT': { $lte: new Date(autoSearchParams.startDateTo).toISOString() } }
+                                { 'publicationDateTime': { $lte: new Date(autoSearchParams.startDateTo) } },
+                                { 'notificationInfo.procedureInfo.collectingInfo.startDT': { $lte: new Date(autoSearchParams.startDateTo) } }
                             ],
                             $or: [
-                                { 'publicationDateTime': { $gte: new Date(autoSearchParams.startDateFrom).toISOString() } },
-                                { 'notificationInfo.procedureInfo.collectingInfo.startDT': { $gte: new Date(autoSearchParams.startDateFrom).toISOString() } }
+                                { 'publicationDateTime': { $gte: new Date(autoSearchParams.startDateFrom) } },
+                                { 'notificationInfo.procedureInfo.collectingInfo.startDT': { $gte: new Date(autoSearchParams.startDateFrom) } }
                             ]
                         }
                     ]
@@ -140,8 +140,8 @@ export const AutoSearch = async () => {
             if (autoSearchParams.endDateFrom != '' && autoSearchParams.endDateTo == '') {
                 query.push({
                     $or: [
-                        { 'submissionCloseDateTime': { $gte: new Date(autoSearchParams.endDateFrom).toISOString() } },
-                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $gte: new Date(autoSearchParams.endDateFrom).toISOString() } }
+                        { 'submissionCloseDateTime': { $gte: new Date(autoSearchParams.endDateFrom) } },
+                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $gte: new Date(autoSearchParams.endDateFrom) } }
                     ]
                 })
             }
@@ -149,8 +149,8 @@ export const AutoSearch = async () => {
             if (autoSearchParams.endDateFrom == '' && autoSearchParams.endDateTo != '') {
                 query.push({
                     $or: [
-                        { 'submissionCloseDateTime': { $lte: new Date(autoSearchParams.endDateTo).toISOString() } },
-                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date(autoSearchParams.endDateTo).toISOString() } }
+                        { 'submissionCloseDateTime': { $lte: new Date(autoSearchParams.endDateTo) } },
+                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date(autoSearchParams.endDateTo) } }
                     ]
                 })
             }
@@ -160,14 +160,14 @@ export const AutoSearch = async () => {
                     $and: [
                         {
                             $or: [
-                                { 'submissionCloseDateTime': { $gte: new Date(autoSearchParams.endDateFrom).toISOString() } },
-                                { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $gte: new Date(autoSearchParams.endDateFrom).toISOString() } }
+                                { 'submissionCloseDateTime': { $gte: new Date(autoSearchParams.endDateFrom) } },
+                                { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $gte: new Date(autoSearchParams.endDateFrom) } }
                             ],
                         },
                         {
                             $or: [
-                                { 'submissionCloseDateTime': { $lte: new Date(autoSearchParams.endDateTo).toISOString() } },
-                                { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date(autoSearchParams.endDateTo).toISOString() } }
+                                { 'submissionCloseDateTime': { $lte: new Date(autoSearchParams.endDateTo) } },
+                                { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date(autoSearchParams.endDateTo) } }
                             ]
                         }
                     ]
@@ -287,9 +287,16 @@ export const AutoSearch = async () => {
             }
 
             if (autoSearchParams.fz != '') {
-                query.push({
-                    fz: autoSearchParams.fz
-                })
+                const resFz = autoSearchParams.fz.split(' ')
+
+                for (let i = 0; i < resFz.length; i++) {
+                    const fz = resFz[i];
+
+                    query.push({
+                        fz: { $regex: fz.trim(), $options: 'i' }
+                    })
+
+                }
             }
 
             function getTime24HoursAgo() {
@@ -336,7 +343,7 @@ export const AutoSearch = async () => {
                 })
             }
 
-            console.log(query);
+            console.log(JSON.stringify(query));
 
 
             const client = await connectDB()
@@ -344,7 +351,7 @@ export const AutoSearch = async () => {
             const collection = db.collection('tender')
 
 
-            const result = await collection.find({ $and: query }).limit(400).toArray();
+            const result = await collection.find({ $and: query }).limit(20).toArray();
 
             const fixedLastSearchTime = await autoSearch.update({
                 last_search: String(new Date())
@@ -360,14 +367,14 @@ export const AutoSearch = async () => {
             for (let i = 0; i < result.length; i++) {
                 const tender = result[i];
 
-                const regNum = tender.registrationNumber ? tender.registrationNumber : tender.commonInfo.purchaseNumber 
+                const regNum = tender.registrationNumber ? tender.registrationNumber : tender.commonInfo.purchaseNumber
 
                 const createAutoSearchResult = await autoSearchResult.create({
                     user_id: autoSearchParams.user_id,
                     autosearch_id: autoSearchParams.id,
                     reg_num: regNum,
                 })
-                
+
             }
 
         }

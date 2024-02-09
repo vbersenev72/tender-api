@@ -351,7 +351,7 @@ class FindController {
 
             if (fz != '') {
                 query.push({
-                    fz: fz
+                    fz: { $regex: fz, $options: 'i' }
                 })
             }
 
