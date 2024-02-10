@@ -350,9 +350,16 @@ class FindController {
             }
 
             if (fz != '') {
-                query.push({
-                    fz: { $regex: fz, $options: 'i' }
-                })
+                const resFz = autoSearchParams.fz.split(' ')
+
+                for (let i = 0; i < resFz.length; i++) {
+                    const fz = resFz[i];
+
+                    query.push({
+                        fz: { $regex: fz.trim(), $options: 'i' }
+                    })
+
+                }
             }
 
 
