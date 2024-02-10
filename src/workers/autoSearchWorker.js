@@ -289,14 +289,23 @@ export const AutoSearch = async () => {
             if (autoSearchParams.fz != '') {
                 const resFz = autoSearchParams.fz.split(' ')
 
+                const res = []
+
                 for (let i = 0; i < resFz.length; i++) {
                     const fz = resFz[i];
 
-                    query.push({
-                        fz: { $regex: fz.trim(), $options: 'i' }
-                    })
-
+                    if (fz != '') {
+                        res.push({
+                            fz: { $regex: fz.trim(), $options: 'i' }
+                        })
+                    }
                 }
+
+                query.push({
+                    $or: [
+                        ...res
+                    ]
+                })
             }
 
             function getTime24HoursAgo() {
