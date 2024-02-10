@@ -355,9 +355,11 @@ class FindController {
                 for (let i = 0; i < resFz.length; i++) {
                     const fz = resFz[i];
 
-                    query.push({
-                        fz: { $regex: fz.trim(), $options: 'i' }
-                    })
+                    if (fz != '') {
+                        query.push({
+                            fz: { $regex: fz.trim(), $options: 'i' }
+                        })
+                    }
 
                 }
             }
