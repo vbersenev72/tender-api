@@ -381,7 +381,7 @@ class FindController {
             const collection = db.collection('tender')
 
 
-            const result = await collection.find({ $and: query }).skip(start).limit(limit).toArray();
+            const result = await collection.find({ $and: query.length > 0 && query }).skip(start).limit(limit).toArray();
 
             return res.json({ message: result })
 
