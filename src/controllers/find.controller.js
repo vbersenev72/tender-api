@@ -383,9 +383,9 @@ class FindController {
             let result
 
             if (query.length > 0) {
-                const result = await collection.find({ $and: query }).skip(start).limit(limit).toArray();
+                result = await collection.find({ $and: query }).skip(start).limit(limit).toArray();
             } else {
-                const result = await collection.find().skip(start).limit(limit).toArray();
+                result = await collection.find().skip(start).limit(limit).toArray();
             }
 
             return res.json({ message: result })
