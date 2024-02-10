@@ -352,16 +352,23 @@ class FindController {
             if (fz != '') {
                 const resFz = fz.split(' ')
 
+                const res = []
+
                 for (let i = 0; i < resFz.length; i++) {
                     const fz = resFz[i];
 
                     if (fz != '') {
-                        query.push({
+                        res.push({
                             fz: { $regex: fz.trim(), $options: 'i' }
                         })
                     }
-
                 }
+
+                query.push({
+                    $or: [
+                        ...res
+                    ]
+                })
             }
 
 
