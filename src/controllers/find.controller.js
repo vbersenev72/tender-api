@@ -125,8 +125,8 @@ class FindController {
 
                 query.push({
                     $or: [
-                        { 'publicationDateTime': { $lte: new Date(publicDateTo).toISOString() } },
-                        { 'commonInfo.publishDTInEIS': { $lte: new Date(publicDateTo).toISOString() } }
+                        { 'publicationDateTime': { $lte: new Date(publicDateTo) } },
+                        { 'commonInfo.publishDTInEIS': { $lte: new Date(publicDateTo) } }
                     ]
                 })
             }
@@ -135,8 +135,8 @@ class FindController {
 
                 query.push({
                     $or: [
-                        { 'publicationDateTime': { $gte: new Date(publicDateFrom).toISOString() } },
-                        { 'commonInfo.publishDTInEIS': { $gte: new Date(publicDateFrom).toISOString() } }
+                        { 'publicationDateTime': { $gte: new Date(publicDateFrom) } },
+                        { 'commonInfo.publishDTInEIS': { $gte: new Date(publicDateFrom) } }
                     ]
                 })
 
@@ -148,14 +148,14 @@ class FindController {
                     $and: [
                         {
                             $or: [
-                                { 'publicationDateTime': { $gte: new Date(publicDateFrom).toISOString() } },
-                                { 'commonInfo.publishDTInEIS': { $gte: new Date(publicDateFrom).toISOString() } }
+                                { 'publicationDateTime': { $gte: new Date(publicDateFrom)} },
+                                { 'commonInfo.publishDTInEIS': { $gte: new Date(publicDateFrom) } }
                             ]
                         },
                         {
                             $or: [
-                                { 'publicationDateTime': { $lte: new Date(publicDateTo).toISOString() } },
-                                { 'commonInfo.publishDTInEIS': { $lte: new Date(publicDateTo).toISOString() } }
+                                { 'publicationDateTime': { $lte: new Date(publicDateTo) } },
+                                { 'commonInfo.publishDTInEIS': { $lte: new Date(publicDateTo) } }
                             ]
                         }
 
@@ -167,8 +167,8 @@ class FindController {
             if (startDateFrom != '' && startDateTo == '') {
                 query.push({
                     $or: [
-                        { 'publicationDateTime': { $gte: new Date(startDateFrom).toISOString() } },
-                        { 'notificationInfo.procedureInfo.collectingInfo.startDT': { $gte: new Date(startDateFrom).toISOString() } }
+                        { 'publicationDateTime': { $gte: new Date(startDateFrom) } },
+                        { 'notificationInfo.procedureInfo.collectingInfo.startDT': { $gte: new Date(startDateFrom) } }
                     ]
                 })
             }
@@ -176,8 +176,8 @@ class FindController {
             if (startDateFrom == '' && startDateTo != '') {
                 query.push({
                     $or: [
-                        { 'publicationDateTime': { $lte: new Date(startDateTo).toISOString() } },
-                        { 'notificationInfo.procedureInfo.collectingInfo.startDT': { $lte: new Date(startDateTo).toISOString() } }
+                        { 'publicationDateTime': { $lte: new Date(startDateTo)} },
+                        { 'notificationInfo.procedureInfo.collectingInfo.startDT': { $lte: new Date(startDateTo) } }
                     ]
                 })
             }
@@ -187,12 +187,12 @@ class FindController {
                     $and: [
                         {
                             $or: [
-                                { 'publicationDateTime': { $lte: new Date(startDateTo).toISOString() } },
-                                { 'notificationInfo.procedureInfo.collectingInfo.startDT': { $lte: new Date(startDateTo).toISOString() } }
+                                { 'publicationDateTime': { $lte: new Date(startDateTo) } },
+                                { 'notificationInfo.procedureInfo.collectingInfo.startDT': { $lte: new Date(startDateTo) } }
                             ],
                             $or: [
-                                { 'publicationDateTime': { $gte: new Date(startDateFrom).toISOString() } },
-                                { 'notificationInfo.procedureInfo.collectingInfo.startDT': { $gte: new Date(startDateFrom).toISOString() } }
+                                { 'publicationDateTime': { $gte: new Date(startDateFrom) } },
+                                { 'notificationInfo.procedureInfo.collectingInfo.startDT': { $gte: new Date(startDateFrom) } }
                             ]
                         }
                     ]
@@ -203,8 +203,8 @@ class FindController {
             if (endDateFrom != '' && endDateTo == '') {
                 query.push({
                     $or: [
-                        { 'submissionCloseDateTime': { $gte: new Date(endDateFrom).toISOString() } },
-                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $gte: new Date(endDateFrom).toISOString() } }
+                        { 'submissionCloseDateTime': { $gte: new Date(endDateFrom)} },
+                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $gte: new Date(endDateFrom) } }
                     ]
                 })
             }
@@ -212,8 +212,8 @@ class FindController {
             if (endDateFrom == '' && endDateTo != '') {
                 query.push({
                     $or: [
-                        { 'submissionCloseDateTime': { $lte: new Date(endDateTo).toISOString() } },
-                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date(endDateTo).toISOString() } }
+                        { 'submissionCloseDateTime': { $lte: new Date(endDateTo) } },
+                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date(endDateTo) } }
                     ]
                 })
             }
@@ -223,14 +223,14 @@ class FindController {
                     $and: [
                         {
                             $or: [
-                                { 'submissionCloseDateTime': { $gte: new Date(endDateFrom).toISOString() } },
-                                { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $gte: new Date(endDateFrom).toISOString() } }
+                                { 'submissionCloseDateTime': { $gte: new Date(endDateFrom) } },
+                                { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $gte: new Date(endDateFrom) } }
                             ],
                         },
                         {
                             $or: [
-                                { 'submissionCloseDateTime': { $lte: new Date(endDateTo).toISOString() } },
-                                { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date(endDateTo).toISOString() } }
+                                { 'submissionCloseDateTime': { $lte: new Date(endDateTo) } },
+                                { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date(endDateTo) } }
                             ]
                         }
                     ]
