@@ -350,7 +350,7 @@ class FindController {
             }
 
             if (fz != '') {
-                const resFz = autoSearchParams.fz.split(' ')
+                const resFz = fz.split(' ')
 
                 for (let i = 0; i < resFz.length; i++) {
                     const fz = resFz[i];
