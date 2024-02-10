@@ -380,8 +380,13 @@ class FindController {
             const db = client.db(process.env.MONGO_DB_NAME)
             const collection = db.collection('tender')
 
+            let result
 
-            const result = await collection.find({ $and: query.length > 0 && query }).skip(start).limit(limit).toArray();
+            if (query.length > 0) {
+                const result = await collection.find({ $and: query }).skip(start).limit(limit).toArray();
+            } else {
+                const result = await collection.find().skip(start).limit(limit).toArray();
+            }
 
             return res.json({ message: result })
 
