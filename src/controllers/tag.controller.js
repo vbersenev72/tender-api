@@ -106,9 +106,8 @@ class TagController {
         try {
 
             const id = req.user.id
-            const { page, idTag } = req.body
+            const { page, idTag, limit } = req.body
 
-            const limit = 8
 
             const tenders = await TendersData.findAll({
                 where: {
@@ -165,7 +164,7 @@ class TagController {
                 }
             })
 
-         
+
 
             return res.json({ message: tenders })
 
