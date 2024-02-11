@@ -90,8 +90,8 @@ class LkController {
 
             const id = req.user.id
             const page = req.params.page
+            const limit = req.query.limit
 
-            const limit = 8
 
             const myTenders = await MyTenders.findAll({
                 where: {
