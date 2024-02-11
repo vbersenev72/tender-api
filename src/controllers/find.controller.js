@@ -8,10 +8,10 @@ class FindController {
     async findByTags(req, res) {
         try {
 
-            const { limit, tags } = req.body
+            const { limit, page, tags } = req.body
 
-            const start = limit.split('-').map(Number)[0]
-            const end = limit.split('-').map(Number)[1]
+            const start = Number(page) * limit
+
 
             console.log(process.env.MONGO_DB_NAME);
 
@@ -23,9 +23,9 @@ class FindController {
             let count
 
             if (JSON.stringify(tags) == JSON.stringify("")) {
-                result = await collection.find().skip(start).limit(end - start + 1).toArray();
+                result = await collection.find().skip(start).limit(limit).toArray();
             } else {
-                result = await collection.find({ $text: { $search: tags } }, { score: { $meta: "text Score" } }).skip(start).limit(end - start + 1).toArray();
+                result = await collection.find({ $text: { $search: tags } }, { score: { $meta: "text Score" } }).skip(start).limit(limit).toArray();
             }
 
 
