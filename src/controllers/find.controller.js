@@ -48,6 +48,8 @@ class FindController {
 
             let {
                 page,
+                limit,
+
                 tags,
                 stopTags,
                 publicDateFrom, publicDateTo,
@@ -66,10 +68,7 @@ class FindController {
 
             } = req.body
 
-            const limit = 20
-
             const start = Number(page) * limit
-            const end = start + 20
 
             const query = [
                 // {
