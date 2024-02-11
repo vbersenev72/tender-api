@@ -266,8 +266,8 @@ class AutoSearchController {
             const id = req.user.id
             const autoSearchId = req.params.id
             const page = req.query.page
+            const limit = req.query.limit
 
-            const limit = 8
 
             const candidate = await AutoSearch.findOne({
                 where: {
