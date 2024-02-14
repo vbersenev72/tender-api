@@ -240,15 +240,21 @@ class FindController {
 
             if (region != '') {
 
-                query.push(
-                    {
-                        $or: [
-                            { 'customer.mainInfo.region': { $regex: region, $options: 'i' } },
-                        ]
-                    }
-                )
+                const regions = region.split(';').filter(value => value !== '');
 
-                // разраб парсера положил хуй на поле региона у тендеров с 44 ФЗ - как только исправит нужно добавить это поле сюды
+                const regexQueryFor223 = regions.map(value => ({
+                    'customer.mainInfo.region': { $regex: value, $options: 'i' }
+                }));
+
+                const regexQueryFor44 = regions.map(value => ({
+                    'purchaseResponsibleInfo.responsibleOrgInfo.postAddress': { $regex: value, $options: 'i' }
+                }));
+
+                query.push({
+                    $or: [...regexQueryFor223, ...regexQueryFor44]
+                });
+
+                // разраб парсера положил хуй на поле региона у тендеров с 44 ФЗ - как только исправит нужно добавить это поле сюды  (есть)
             }
 
             if (tenderNum != '') {
@@ -349,7 +355,7 @@ class FindController {
                 query.push({
                     $or: regexQuery
                 });
-                
+
             }
 
             if (fz != '') {
