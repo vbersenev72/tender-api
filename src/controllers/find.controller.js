@@ -339,13 +339,17 @@ class FindController {
             }
 
 
-            if (okpd2 != '') {
+            if (okpd2 !== '') {
+
+                const okpd2Codes = okpd2.split(' ').filter(code => code !== ''); // Разделение строки на отдельные коды и фильтрация пустых элементов
+                const regexQuery = okpd2Codes.map(code => ({
+                    'lots.lot.lotData.lotItems.lotItem.okpd2.code': { $regex: '^' + code, $options: 'i' }
+                }));
+
                 query.push({
-                    $or: [
-                        { 'lots.lot.lotData.lotItems.lotItem.okpd2.code': { $regex: '^' + okpd2, $options: 'i' } },
-                        { 'lots.lot.lotData.lotItems.lotItem.okpd2.code': { $regex: '^' + okpd2, $options: 'i' } }
-                    ]
-                })
+                    $or: regexQuery
+                });
+                
             }
 
             if (fz != '') {
