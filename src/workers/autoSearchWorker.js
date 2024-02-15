@@ -300,8 +300,10 @@ export const AutoSearch = async () => {
                 const methodDeterminingSupplierValues = autoSearchParams.methodDeterminingSupplier.split(/;| /).filter(code => code !== '');
 
                 const regexQuery = methodDeterminingSupplierValues.map(value => ({
-                    'purchaseCodeName': {$regex: value, $options: 'i'},
-                    "commonInfo.placingWay.name": {$regex: value, $options: 'i'}
+                    $or: [
+                        { 'purchaseCodeName': { $regex: value, $options: 'i' } },
+                        { "commonInfo.placingWay.name": { $regex: value, $options: 'i' } }
+                    ]
                 }));
 
                 query.push({
