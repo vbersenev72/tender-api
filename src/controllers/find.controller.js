@@ -376,6 +376,54 @@ class FindController {
 
             }
 
+            ////////////////
+            if (purchaseStage !== '') {
+                const stageValues = purchaseStage.split(/;| /).filter(code => code !== '');
+
+                const regexQuery = stageValues.map((value) => {
+
+                    const resultQuery = []
+
+                    if (value.toLowerCase() == 'подача заявок') {
+                        resultQuery.push({
+                            $or: [
+                                {'notificationInfo.procedureInfo.collectingInfo.startDT': { $lte: new Date().toISOString()} },
+                                {'notificationInfo.procedureInfo.collectingInfo.startDT': { $lte: new Date().toISOString()} },
+                            ]
+                        })
+                    }
+
+                    if (value.toLowerCase() == 'работа комиссии') {
+                        resultQuery.push({
+                            $or: [
+                                {'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date().toISOString()} },
+                                {'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date().toISOString()} },
+                            ]
+                        })
+                    }
+
+
+
+                })
+
+
+                // const regexQuery = stageValues.map(value => ({
+                //     $or: [
+                //         { 'purchaseCodeName': { $regex: value, $options: 'i' } },
+                //         { "commonInfo.placingWay.name": { $regex: value, $options: 'i' } }
+                //     ]
+                // }));
+
+                console.log(JSON.stringify(regexQuery));
+
+                query.push({
+                    $or: regexQuery
+                });
+
+            }
+
+
+
             if (fz != '') {
                 const resFz = fz.split(' ')
 
