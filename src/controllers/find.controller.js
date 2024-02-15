@@ -366,6 +366,8 @@ class FindController {
                     "commonInfo.placingWay.name": {$regex: value, $options: 'i'}
                 }));
 
+                console.log(JSON.stringify(regexQuery));
+
                 query.push({
                     $or: regexQuery
                 });
