@@ -296,6 +296,20 @@ export const AutoSearch = async () => {
 
             }
 
+            if (autoSearchParams.methodDeterminingSupplier !== '') {
+                const methodDeterminingSupplierValues = autoSearchParams.methodDeterminingSupplier.split(/;| /).filter(code => code !== '');
+
+                const regexQuery = methodDeterminingSupplierValues.map(value => ({
+                    'purchaseCodeName': {$regex: value, $options: 'i'},
+                    "commonInfo.placingWay.name": {$regex: value, $options: 'i'}
+                }));
+
+                query.push({
+                    $or: regexQuery
+                });
+
+            }
+
             if (autoSearchParams.fz != '') {
                 const resFz = autoSearchParams.fz.split(' ')
 

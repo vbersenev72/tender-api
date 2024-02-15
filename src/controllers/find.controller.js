@@ -358,6 +358,20 @@ class FindController {
 
             }
 
+            if (methodDeterminingSupplier !== '') {
+                const methodDeterminingSupplierValues = methodDeterminingSupplier.split(/;| /).filter(code => code !== '');
+
+                const regexQuery = methodDeterminingSupplierValues.map(value => ({
+                    'purchaseCodeName': {$regex: value, $options: 'i'},
+                    "commonInfo.placingWay.name": {$regex: value, $options: 'i'}
+                }));
+
+                query.push({
+                    $or: regexQuery
+                });
+
+            }
+
             if (fz != '') {
                 const resFz = fz.split(' ')
 
