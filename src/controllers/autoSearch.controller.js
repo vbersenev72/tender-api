@@ -65,6 +65,7 @@ class AutoSearchController {
                 source: source,
                 enableSource: enableSource,
                 okpd2: okpd2,
+                methodDeterminingSupplier: methodDeterminingSupplier
 
             })
 
@@ -134,6 +135,7 @@ class AutoSearchController {
                 source: source,
                 enableSource: enableSource,
                 okpd2: okpd2,
+                methodDeterminingSupplier: methodDeterminingSupplier
 
             }, {
                 where: {

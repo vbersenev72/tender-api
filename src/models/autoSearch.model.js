@@ -92,6 +92,10 @@ export default (sequelize, Sequelize) => {
             type: Sequelize.TEXT,
             defaultValue: ''
         },
+        methodDeterminingSupplier: {
+            type: Sequelize.TEXT,
+            defaultValue: ''
+        },
         push_user: {
             type: Sequelize.TEXT,
             defaultValue: ''
