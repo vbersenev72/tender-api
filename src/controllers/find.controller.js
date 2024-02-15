@@ -380,64 +380,52 @@ class FindController {
             if (purchaseStage !== '') {
                 const stageValues = purchaseStage.split(/;| /).filter(code => code !== '');
 
-                const regexQuery = stageValues.map((value) => {
-
-                    let resultQuery = {}
+                const regexQuery = stageValues.forEach((value) => {
 
                     if (value.toLowerCase() == 'Подача заявок') {
-                        resultQuery = {
+                        query.push({
                             $or: [
                                 {'notificationInfo.procedureInfo.collectingInfo.startDT': { $lte: new Date().toISOString()} },
                                 {'publicationDateTime': { $lte: new Date().toISOString()} },
                             ]
-                        }
+                        })
                     }
 
                     if (value.toLowerCase() == 'Работа комиссии') {
-                        resultQuery = {
+                        query.push({
                             $or: [
                                 {'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date().toISOString()} },
                                 {'submissionCloseDateTime': { $lte: new Date().toISOString()} },
                             ]
-                        }
+                        })
                     }
 
                     if (value.toLowerCase() == 'Закупка завершена') {
-                        resultQuery = {
+                        query.push({
                             $or: [
                                 {"notificationInfo.procedureInfo.summarizingDate": { $lte: new Date().toISOString()} },
                                 {"placingProcedure.summingupDateTime": { $lte: new Date().toISOString()} },
                             ]
-                        }
+                        })
                     }
                     if (value.toLowerCase() == 'Закупка приостановлена') {
-                        resultQuery = {
+                        query.push({
                             $or: [
                                 {"notificationInfo.procedureInfo.summarizingDate": { $lte: new Date().toISOString()} },
                                 {"placingProcedure.summingupDateTime": { $lte: new Date().toISOString()} },
                             ]
-                        }
+                        })
                     }
                     if (value.toLowerCase() == 'Закупка отменена') {
-                        resultQuery = {
+                        query.push({
                             $or: [
                                 {"notificationInfo.procedureInfo.summarizingDate": { $lte: new Date().toISOString()} },
                                 {'placingProcedure.summingupDateTime': { $lte: new Date().toISOString()} },
                             ]
-                        }
+                        })
                     }
 
-                    return resultQuery
-
-
                 })
-
-
-                console.log(JSON.stringify(regexQuery));
-
-                query.push({
-                    $or: regexQuery
-                });
 
             }
 
