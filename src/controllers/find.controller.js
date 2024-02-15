@@ -240,7 +240,7 @@ class FindController {
 
             if (region != '') {
 
-                const regions = region.split(';').filter(value => value !== '');
+                const regions = region.split(/;| /).filter(value => value !== '');
 
                 const regexQueryFor223 = regions.map(value => ({
                     'customer.mainInfo.region': { $regex: value, $options: 'i' }

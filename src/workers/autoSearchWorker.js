@@ -178,7 +178,7 @@ export const AutoSearch = async () => {
 
             if (autoSearchParams.region != '') {
 
-                const regions = autoSearchParams.region.split(';').filter(value => value !== '');
+                const regions = autoSearchParams.region.split(/;| /).filter(value => value !== '');
 
                 const regexQueryFor223 = regions.map(value => ({
                     'customer.mainInfo.region': { $regex: value, $options: 'i' }
