@@ -382,7 +382,7 @@ class FindController {
 
                 const regexQuery = stageValues.map((value) => {
 
-                    let resultQuery
+                    let resultQuery = {}
 
                     if (value.toLowerCase() == 'подача заявок') {
                         resultQuery = {
