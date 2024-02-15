@@ -23,9 +23,9 @@ class FindController {
             let count
 
             if (JSON.stringify(tags) == JSON.stringify("")) {
-                result = await collection.find().skip(start).limit(limit).toArray();
+                result = await collection.find().skip(start).limit(limit).sort({ customDate: -1 }).toArray();
             } else {
-                result = await collection.find({ $text: { $search: tags } }, { score: { $meta: "text Score" } }).skip(start).limit(limit).toArray();
+                result = await collection.find({ $text: { $search: tags } }, { score: { $meta: "text Score" } }).skip(start).limit(limit).sort({ customDate: -1 }).toArray();
             }
 
 
@@ -433,13 +433,6 @@ class FindController {
                 })
 
 
-                // const regexQuery = stageValues.map(value => ({
-                //     $or: [
-                //         { 'purchaseCodeName': { $regex: value, $options: 'i' } },
-                //         { "commonInfo.placingWay.name": { $regex: value, $options: 'i' } }
-                //     ]
-                // }));
-
                 console.log(JSON.stringify(regexQuery));
 
                 query.push({
@@ -484,9 +477,9 @@ class FindController {
             let result
 
             if (query.length > 0) {
-                result = await collection.find({ $and: query }).skip(start).limit(limit).toArray();
+                result = await collection.find({ $and: query }).skip(start).limit(limit).sort({ customDate: -1 }).toArray();
             } else {
-                result = await collection.find().skip(start).limit(limit).toArray();
+                result = await collection.find().skip(start).limit(limit).sort({ customDate: -1 }).toArray();
             }
 
             return res.json({ message: result })
