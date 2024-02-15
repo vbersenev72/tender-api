@@ -384,7 +384,7 @@ class FindController {
 
                     let resultQuery = {}
 
-                    if (value.toLowerCase() == 'подача заявок') {
+                    if (value.toLowerCase() == 'Подача заявок') {
                         resultQuery = {
                             $or: [
                                 {'notificationInfo.procedureInfo.collectingInfo.startDT': { $lte: new Date().toISOString()} },
@@ -393,7 +393,7 @@ class FindController {
                         }
                     }
 
-                    if (value.toLowerCase() == 'работа комиссии') {
+                    if (value.toLowerCase() == 'Работа комиссии') {
                         resultQuery = {
                             $or: [
                                 {'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date().toISOString()} },
@@ -402,7 +402,7 @@ class FindController {
                         }
                     }
 
-                    if (value.toLowerCase() == 'закупка завершена') {
+                    if (value.toLowerCase() == 'Закупка завершена') {
                         resultQuery = {
                             $or: [
                                 {"notificationInfo.procedureInfo.summarizingDate": { $lte: new Date().toISOString()} },
@@ -410,7 +410,7 @@ class FindController {
                             ]
                         }
                     }
-                    if (value.toLowerCase() == 'закупка приостановлена') {
+                    if (value.toLowerCase() == 'Закупка приостановлена') {
                         resultQuery = {
                             $or: [
                                 {"notificationInfo.procedureInfo.summarizingDate": { $lte: new Date().toISOString()} },
@@ -418,7 +418,7 @@ class FindController {
                             ]
                         }
                     }
-                    if (value.toLowerCase() == 'закупка отменена') {
+                    if (value.toLowerCase() == 'Закупка отменена') {
                         resultQuery = {
                             $or: [
                                 {"notificationInfo.procedureInfo.summarizingDate": { $lte: new Date().toISOString()} },
