@@ -65,7 +65,8 @@ class AutoSearchController {
                 source: source,
                 enableSource: enableSource,
                 okpd2: okpd2,
-                methodDeterminingSupplier: methodDeterminingSupplier
+                methodDeterminingSupplier: methodDeterminingSupplier,
+                purchaseStage: purchaseStage
 
             })
 
@@ -135,8 +136,8 @@ class AutoSearchController {
                 source: source,
                 enableSource: enableSource,
                 okpd2: okpd2,
-                methodDeterminingSupplier: methodDeterminingSupplier
-
+                methodDeterminingSupplier: methodDeterminingSupplier,
+                purchaseStage: purchaseStage
             }, {
                 where: {
                     user_id: id,

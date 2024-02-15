@@ -96,6 +96,10 @@ export default (sequelize, Sequelize) => {
             type: Sequelize.TEXT,
             defaultValue: ''
         },
+        purchaseStage: {
+            type: Sequelize.TEXT,
+            defaultValue: ''
+        },
         push_user: {
             type: Sequelize.TEXT,
             defaultValue: ''
