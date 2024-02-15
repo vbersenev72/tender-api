@@ -178,13 +178,19 @@ export const AutoSearch = async () => {
 
             if (autoSearchParams.region != '') {
 
-                query.push(
-                    {
-                        $or: [
-                            { 'customer.mainInfo.region': { $regex: autoSearchParams.region, $options: 'i' } },
-                        ]
-                    }
-                )
+                const regions = autoSearchParams.region.split(';').filter(value => value !== '');
+
+                const regexQueryFor223 = regions.map(value => ({
+                    'customer.mainInfo.region': { $regex: value, $options: 'i' }
+                }));
+
+                const regexQueryFor44 = regions.map(value => ({
+                    'purchaseResponsibleInfo.responsibleOrgInfo.postAddress': { $regex: value, $options: 'i' }
+                }));
+
+                query.push({
+                    $or: [...regexQueryFor223, ...regexQueryFor44]
+                });
 
                 // разраб парсера положил хуй на поле региона у тендеров с 44 ФЗ - как только исправит нужно добавить это поле сюды
             }
@@ -278,12 +284,16 @@ export const AutoSearch = async () => {
 
 
             if (autoSearchParams.okpd2 != '') {
+
+                const okpd2Codes = autoSearchParams.okpd2.split(/;| /).filter(code => code !== ''); // Разделение строки на отдельные коды и фильтрация пустых элементов
+                const regexQuery = okpd2Codes.map(code => ({
+                    'lots.lot.lotData.lotItems.lotItem.okpd2.code': { $regex: '^' + code, $options: 'i' }
+                }));
+
                 query.push({
-                    $or: [
-                        { 'lots.lot.lotData.lotItems.lotItem.okpd2.code': { $regex: '^' + autoSearchParams.okpd2, $options: 'i' } },
-                        { 'lots.lot.lotData.lotItems.lotItem.okpd2.code': { $regex: '^' + autoSearchParams.okpd2, $options: 'i' } }
-                    ]
-                })
+                    $or: regexQuery
+                });
+
             }
 
             if (autoSearchParams.fz != '') {

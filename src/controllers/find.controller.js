@@ -347,7 +347,7 @@ class FindController {
 
             if (okpd2 !== '') {
 
-                const okpd2Codes = okpd2.split(' ').filter(code => code !== ''); // Разделение строки на отдельные коды и фильтрация пустых элементов
+                const okpd2Codes = okpd2.split(/;| /).filter(code => code !== ''); // Разделение строки на отдельные коды и фильтрация пустых элементов
                 const regexQuery = okpd2Codes.map(code => ({
                     'lots.lot.lotData.lotItems.lotItem.okpd2.code': { $regex: '^' + code, $options: 'i' }
                 }));
