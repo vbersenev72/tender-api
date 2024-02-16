@@ -377,57 +377,68 @@ class FindController {
             }
 
             ////////////////
-            if (purchaseStage !== '') {
-                const stageValues = purchaseStage.split(/;| /).filter(code => code !== '');
+            // if (purchaseStage !== '') {
+            //     const stageValues = purchaseStage.split(/;| /).filter(code => code !== '');
 
-                const regexQuery = stageValues.forEach((value) => {
+            //     const regexQuery = stageValues.forEach((value) => {
 
-                    if (value.toLowerCase() == 'Подача заявок') {
-                        query.push({
-                            $or: [
-                                {'notificationInfo.procedureInfo.collectingInfo.startDT': { $lte: new Date().toISOString()} },
-                                {'publicationDateTime': { $lte: new Date().toISOString()} },
-                            ]
-                        })
-                    }
+            //         if (value.toLowerCase() == 'Подача заявок') {
 
-                    if (value.toLowerCase() == 'Работа комиссии') {
-                        query.push({
-                            $or: [
-                                {'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date().toISOString()} },
-                                {'submissionCloseDateTime': { $lte: new Date().toISOString()} },
-                            ]
-                        })
-                    }
+            //             query.push({
+            //                 $and: [
+            //                     {
+            //                         $or: [
+            //                             { 'notificationInfo.procedureInfo.collectingInfo.startDT': { $lte: new Date().toISOString() }, },
+            //                             { 'publicationDateTime': { $lte: new Date().toISOString() } },
+            //                         ]
+            //                     },
+            //                     {
+            //                         $or: [
+            //                             { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $gte: new Date().toISOString() } },
+            //                             { 'submissionCloseDateTime': { $gte: new Date().toISOString() } },
+            //                         ]
+            //                     }
+            //                 ]
+            //             })
+            //         }
 
-                    if (value.toLowerCase() == 'Закупка завершена') {
-                        query.push({
-                            $or: [
-                                {"notificationInfo.procedureInfo.summarizingDate": { $lte: new Date().toISOString()} },
-                                {"placingProcedure.summingupDateTime": { $lte: new Date().toISOString()} },
-                            ]
-                        })
-                    }
-                    if (value.toLowerCase() == 'Закупка приостановлена') {
-                        query.push({
-                            $or: [
-                                {"notificationInfo.procedureInfo.summarizingDate": { $lte: new Date().toISOString()} },
-                                {"placingProcedure.summingupDateTime": { $lte: new Date().toISOString()} },
-                            ]
-                        })
-                    }
-                    if (value.toLowerCase() == 'Закупка отменена') {
-                        query.push({
-                            $or: [
-                                {"notificationInfo.procedureInfo.summarizingDate": { $lte: new Date().toISOString()} },
-                                {'placingProcedure.summingupDateTime': { $lte: new Date().toISOString()} },
-                            ]
-                        })
-                    }
+            //         if (value.toLowerCase() == 'Работа комиссии') {
+            //             query.push({
+            //                 $or: [
+            //                     { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date() } },
+            //                     { 'submissionCloseDateTime': { $lte: new Date().toISOString() } },
+            //                 ]
+            //             })
+            //         }
 
-                })
+            //         if (value.toLowerCase() == 'Закупка завершена') {
+            //             query.push({
+            //                 $or: [
+            //                     { "notificationInfo.procedureInfo.summarizingDate": { $lte: new Date() } },
+            //                     { "placingProcedure.summingupDateTime": { $lte: new Date() } },
+            //                 ]
+            //             })
+            //         }
+            //         if (value.toLowerCase() == 'Закупка приостановлена') {
+            //             query.push({
+            //                 $or: [
+            //                     { "notificationInfo.procedureInfo.summarizingDate": { $lte: new Date() } },
+            //                     { "placingProcedure.summingupDateTime": { $lte: new Date() } },
+            //                 ]
+            //             })
+            //         }
+            //         if (value.toLowerCase() == 'Закупка отменена') {
+            //             query.push({
+            //                 $or: [
+            //                     { "notificationInfo.procedureInfo.summarizingDate": { $lte: new Date() } },
+            //                     { 'placingProcedure.summingupDateTime': { $lte: new Date() } },
+            //                 ]
+            //             })
+            //         }
 
-            }
+            //     })
+
+            // }
 
 
 
@@ -667,7 +678,6 @@ class FindController {
             const db = client.db(process.env.MONGO_DB_NAME)
             const collection = db.collection('tender')
 
-
             const tender = await collection.findOne({
                 $or: [
                     { "customer.mainInfo.inn": id },
@@ -676,6 +686,7 @@ class FindController {
                     { 'purchaseResponsibleInfo.responsibleOrgInfo.INN': id }
                 ]
             })
+
 
 
             if (!tender) return res.status(400).json({ message: 'not found' })
