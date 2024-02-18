@@ -271,7 +271,7 @@ class FindController {
 
             if (customerName != "") {
 
-                if (stopCustomerName == true) {
+                if (String(stopCustomerName) == 'true') {
                     query.push({
                         'customer.mainInfo.fullName': { $not: { $regex: customerName, $options: 'i' } },
                         'purchaseResponsibleInfo.responsibleOrgInfo.fullName': { $not: { $regex: customerName, $options: 'i' } }

@@ -209,7 +209,7 @@ export const AutoSearch = async () => {
 
             if (autoSearchParams.customerName != "") {
 
-                if (autoSearchParams.stopCustomerName == true) {
+                if (String(autoSearchParams.stopCustomerName) == 'true') {
                     query.push({
                         'customer.mainInfo.fullName': { $not: { $regex: autoSearchParams.customerName, $options: 'i' } },
                         'purchaseResponsibleInfo.responsibleOrgInfo.fullName': { $not: { $regex: autoSearchParams.customerName, $options: 'i' } }
