@@ -10,7 +10,10 @@ class FindController {
 
             const { limit, page, tags } = req.body
 
-            let start = Number(page) * limit - 1
+            let start = Number(page) * limit
+            if (page == 1) {
+                start = 0
+            }
 
             console.log(process.env.MONGO_DB_NAME);
 
@@ -67,7 +70,10 @@ class FindController {
 
             } = req.body
 
-            let start = Number(page) * limit - 1
+            let start = Number(page) * limit
+            if (page == 1) {
+                start = 0
+            }
 
             const query = [
                 // {
