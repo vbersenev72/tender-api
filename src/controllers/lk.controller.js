@@ -4,6 +4,8 @@ import db from "../models/index.js";
 import bcrypt from 'bcryptjs'
 import { Op } from "sequelize";
 import generateJwt from "../helpers/generateJwt.js";
+import { uid } from "uid";
+import { sendEmail } from "../helpers/sendEmail.js";
 
 config()
 
@@ -129,13 +131,13 @@ class LkController {
                 post_address: postAddress,
                 email_notif: emailNotif,
                 push_notif: pushNotif
-            },{
+            }, {
                 where: {
                     id: id
                 }
             })
 
-            return res.json({message: 'Профиль обновлён'})
+            return res.json({ message: 'Профиль обновлён' })
 
         } catch (error) {
             console.log(error);
@@ -148,17 +150,17 @@ class LkController {
         try {
 
             const id = req.user.id
-            const {oldPassword, newPassword, copyNewPassword} = req.body
+            const { oldPassword, newPassword, copyNewPassword } = req.body
 
             if (newPassword != copyNewPassword) {
-                return res.status(400).json({message: 'Пароли не совпадают'})
+                return res.status(400).json({ message: 'Пароли не совпадают' })
             }
 
             const candidate = await Users.findOne({ where: { id: id } })
 
             const isPassValid = bcrypt.compareSync(oldPassword, candidate.password)
             if (!isPassValid) {
-                return res.status(400).json({message: "Пароль не верный"})
+                return res.status(400).json({ message: "Пароль не верный" })
             }
 
             const hashPassword = await bcrypt.hash(newPassword, 5)
@@ -173,11 +175,39 @@ class LkController {
 
             const token = generateJwt(id)
 
-            return res.json({message: 'Пароль изменён'})
+            return res.json({ message: 'Пароль изменён' })
 
         } catch (error) {
             console.log(error);
             return res.status(400).json({ message: "Ошибка. Попробуйте позже", error })
+        }
+    }
+
+    async resetPass(req, res) {
+        try {
+
+            const { email } = req.body
+
+            const candidate = await Users.findOne({ where: { email: email } })
+            if (!candidate) return res.status(400).json({message: 'Пользователя не существует'})
+
+            const password = uid(16)
+            console.log(password);
+
+            sendEmail('Пароль для использования Tender', "Ваш новый пароль для использования платформы Tender:\n"+password, email)
+
+            const hashPassword = await bcrypt.hash(password, 5)
+
+            let user = await Users.update({
+                password: hashPassword,
+            })
+
+            return res.json({message: 'Новый пароль отправлен на вашу почту'})
+
+
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({ message: "Ошибка сброса пароля. Попробуйте позже", error })
         }
     }
 
@@ -192,7 +222,7 @@ class LkController {
                 }
             })
 
-            return res.json({message: user})
+            return res.json({ message: user })
 
         } catch (error) {
             console.log(error);

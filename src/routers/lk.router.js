@@ -10,6 +10,8 @@ lkRouter.get('/mytenders/:page', authMiddleware, lkController.getMyTenders)
 lkRouter.post('/changepass', authMiddleware, lkController.changePassword)
 lkRouter.get('/profile', authMiddleware, lkController.getProfileInfo)
 lkRouter.post('/profile', authMiddleware, lkController.editProlife)
+lkRouter.post('/resetpass', lkController.resetPass)
+
 
 
 export default lkRouter
