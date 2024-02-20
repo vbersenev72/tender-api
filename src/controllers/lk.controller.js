@@ -198,6 +198,10 @@ class LkController {
 
             let user = await Users.update({
                 password: hashPassword,
+            }, {
+                where: {
+                    email: email
+                }
             })
 
             sendEmail('Пароль для использования Tender', "Ваш новый пароль для использования платформы Tender:\n"+password, email)
