@@ -4,6 +4,23 @@ import { config } from "dotenv";
 
 config()
 
+const collections44 = ['appAbsence', 'clarification', 'notificationCancel', 'protocol', 'protocolCancel',
+    'protocolDeviation', 'protocolEvDevCancel', 'protocolEvasion', 'result', 'sign', 'contract']
+
+const collections223 = ['contract', 'explanation', 'purchaseProtocol', 'lotCancellation', 'rejection']
+
+export function deleteUselessFields(obj) {
+    for (let prop in obj) {
+        if (prop === '_uniques' || prop === '_totalRecords' || prop === 'signature') {
+            delete obj[prop];
+        }  if (typeof obj[prop] === 'object' && obj[prop] != null) {
+            deleteUselessFields(obj[prop]);
+        }
+    }
+    return obj
+}
+
+
 class FindController {
     async findByTags(req, res) {
         try {
@@ -660,11 +677,70 @@ class FindController {
                 ]
             })
 
-
-
             if (!tender) return res.status(400).json({ message: 'not found' })
 
-            return res.json({ purchaseProtocol: [], tender: [tender], explanation: [] })
+            let promises = []
+
+            if (tender.fz == 'fz223') {
+
+                promises = collections223.map(name => {
+                    return new Promise((resolve, reject) => {
+                        const model = db.collection(name);
+                        switch (name) {
+                            case "purchaseProtocol": {
+                                model.find({ fz: "fz223", "purchaseInfo.purchaseNoticeNumber": id }).toArray()
+                                    .then(data => resolve([name, deleteUselessFields(data)]));
+                                break
+                            }
+                            case "contract": {
+                                model.find({ fz: "fz223", "purchaseNoticeInfo.purchaseNoticeNumber": id }).toArray()
+                                    .then(data => resolve([name, deleteUselessFields(data)]));
+                                break
+                            }
+                            case "explanation": {
+                                model.find({ purchaseRegNum: id }).toArray()
+                                    .then(data => resolve([name, deleteUselessFields(data)]));
+                                break
+                            }
+                            case "lotCancellation": {
+                                model.find({ fz: "fz223", "purchaseInfo.purchaseNoticeNumber": id }).toArray()
+                                    .then(data => resolve([name, deleteUselessFields(data)]));
+                                break
+                            }
+                            case "rejection": {
+                                model.find({ cancelNoticeRegistrationNumber: id }).toArray()
+                                    .then(data => resolve([name, deleteUselessFields(data)]));
+                                break
+                            }
+                        }
+                    });
+                })
+
+
+            } else {
+
+                promises = collections44.map(name => {
+                    return new Promise((resolve, reject) => {
+                        const model = db.collection(name);
+                        let query;
+                        switch (name) {
+                            case 'result': { query = { fz: "fz44", purchaseNumber: id }; break }
+                            case 'sign': { query = { fz: "fz44", "foundationInfo.purchaseNumber": id }; break }
+                            case 'contract': { query = { fz: "fz44", "foundation.fcsOrder.order.notificationNumber": id }; break }
+                            default: query = { fz: "fz44", "commonInfo.purchaseNumber": id }
+                        }
+                        model.find(query).toArray()
+                            .then(data => resolve([name, deleteUselessFields(data)]));
+                    })
+                })
+
+
+            }
+
+            let result = await Promise.all(promises)
+            result = Object.fromEntries([...result, ['tender', [tender]]])
+
+            return res.json({message: result})
 
         } catch (error) {
             console.log(error);
