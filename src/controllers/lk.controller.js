@@ -194,13 +194,13 @@ class LkController {
             const password = uid(16)
             console.log(password);
 
-            sendEmail('Пароль для использования Tender', "Ваш новый пароль для использования платформы Tender:\n"+password, email)
-
             const hashPassword = await bcrypt.hash(password, 5)
 
             let user = await Users.update({
                 password: hashPassword,
             })
+
+            sendEmail('Пароль для использования Tender', "Ваш новый пароль для использования платформы Tender:\n"+password, email)
 
             return res.json({message: 'Новый пароль отправлен на вашу почту'})
 
