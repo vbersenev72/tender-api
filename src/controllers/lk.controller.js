@@ -121,7 +121,7 @@ class LkController {
             const myTenders = await MyTenders.findAll({
                 where: {
                     user_id: id
-                },
+                }
             })
 
             return res.json({ message: myTenders })
