@@ -113,6 +113,26 @@ class LkController {
     }
 
 
+    async getAllMyTenders(req, res) {
+        try {
+
+            const id = req.user.id
+
+            const myTenders = await MyTenders.findAll({
+                where: {
+                    user_id: id
+                },
+            })
+
+            return res.json({ message: myTenders })
+
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({ message: "error", error })
+        }
+    }
+
+
     async editProlife(req, res) {
         try {
 
