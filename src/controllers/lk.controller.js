@@ -185,7 +185,7 @@ class LkController {
 
             const hashPassword = await bcrypt.hash(newPassword, 5)
 
-            let user = await Users.create({
+            let user = await Users.update({
                 password: hashPassword,
             }, {
                 where: {
