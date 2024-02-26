@@ -96,6 +96,7 @@ class FindController {
                 // {
                 //     fz: 'fz44'
                 // }
+                { customDate: -1 }
             ]
 
             if (tags == "" && stopTags != "") {
@@ -495,7 +496,7 @@ class FindController {
             let result
 
             if (query.length > 0) {
-                result = await collection.find({ $and: [...query, { customDate: -1 }] }).skip(start).limit(limit).toArray();
+                result = await collection.find({ $and: query }).skip(start).limit(limit).toArray();
             } else {
                 result = await collection.find().skip(start).limit(limit).sort({ customDate: -1 }).toArray();
             }
