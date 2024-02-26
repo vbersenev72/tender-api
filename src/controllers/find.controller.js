@@ -94,9 +94,8 @@ class FindController {
 
             const query = [
                 // {
-                //     fz: 'fz44'
+                //     fz: 'fz44'ввв
                 // }
-                { customDate: -1 }
             ]
 
             if (tags == "" && stopTags != "") {
