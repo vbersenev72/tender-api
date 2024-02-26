@@ -101,10 +101,7 @@ class FindController {
             if (tags == "" && stopTags != "") {
                 const regexArray = stopTags.split(' ').map(word => new RegExp(word, 'i'));
 
-                query.push({
-                    'commonInfo.purchaseObjectInfo': { $not: { $in: regexArray } },
-                    name: { $not: { $in: regexArray } }
-                })
+                query.push({ $text: { $search: tags } }, { score: { $meta: "text Score" } })
 
 
             }

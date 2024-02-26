@@ -28,12 +28,7 @@ export const AutoSearch = async () => {
             if (autoSearchParams.tags != "" && autoSearchParams.stopTags == "") {
 
                 query.push(
-                    {
-                        $or: [
-                            { "commonInfo.purchaseObjectInfo": { $in: autoSearchParams.tags.split(' ').map(word => new RegExp(word, 'i')), } },
-                            { name: { $in: autoSearchParams.tags.split(' ').map(word => new RegExp(word, 'i')), } }
-                        ]
-                    },
+                    { $text: { $search: tags } }, { score: { $meta: "text Score" } }
                 )
 
             }
