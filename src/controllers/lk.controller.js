@@ -261,7 +261,7 @@ class LkController {
         try {
 
             const id = req.user.id
-            const { email, regNum } = req.body
+            const { regNum } = req.body
 
             const isSended = await sendTenderSpecialist.findOne({
                 where: {
