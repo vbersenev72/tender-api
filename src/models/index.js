@@ -7,7 +7,7 @@ import tendersDataModel from "./tendersData.model.js";
 import autoSearchModel from "./autoSearch.model.js";
 import autoSearchResultModel from "./autoSearchResult.model.js";
 import reportExcelModel from "./reportExcel.model.js";
-
+import sendTenderSpecialistModel from "./sendTenderSpecialist.model.js";
 
 const sequelize = new Sequelize(tenderApiDb.DB, tenderApiDb.USER, tenderApiDb.PASSWORD, {
     host: tenderApiDb.HOST,
@@ -43,5 +43,6 @@ const sequelize = new Sequelize(tenderApiDb.DB, tenderApiDb.USER, tenderApiDb.PA
   db.tendersData = tendersDataModel(sequelize, Sequelize)
   db.autoSearchResult = autoSearchResultModel(sequelize, Sequelize)
   db.reportExcel = reportExcelModel(sequelize, Sequelize)
+  db.sendTenderSpecialist = sendTenderSpecialistModel(sequelize, Sequelize)
 
   export default db

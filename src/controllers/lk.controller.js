@@ -6,12 +6,14 @@ import { Op } from "sequelize";
 import generateJwt from "../helpers/generateJwt.js";
 import { uid } from "uid";
 import { sendEmail } from "../helpers/sendEmail.js";
+import { tenderSpecialistsArray } from "../../config.js";
 
 config()
 
 
 const Users = db.users
 const MyTenders = db.myTenders
+const sendTenderSpecialist = db.sendTenderSpecialist
 
 
 class LkController {
@@ -209,7 +211,7 @@ class LkController {
             const { email } = req.body
 
             const candidate = await Users.findOne({ where: { email: email } })
-            if (!candidate) return res.status(400).json({message: 'Пользователя не существует'})
+            if (!candidate) return res.status(400).json({ message: 'Пользователя не существует' })
 
             const password = uid(16)
             console.log(password);
@@ -224,9 +226,9 @@ class LkController {
                 }
             })
 
-            sendEmail('Пароль для использования Tender', "Ваш новый пароль для использования платформы Tender:\n"+password, email)
+            sendEmail('Пароль для использования Tender', "Ваш новый пароль для использования платформы Tender:\n" + password, email)
 
-            return res.json({message: 'Новый пароль отправлен на вашу почту'})
+            return res.json({ message: 'Новый пароль отправлен на вашу почту' })
 
 
         } catch (error) {
@@ -251,6 +253,75 @@ class LkController {
         } catch (error) {
             console.log(error);
             return res.status(400).json({ message: "Ошибка. Попробуйте позже", error })
+        }
+    }
+
+
+    async sendToTenderSpecialist(req, res) {
+        try {
+
+            const id = req.user.id
+            const { email, regNum } = req.body
+
+            const isSended = await sendTenderSpecialist.findOne({
+                where: {
+                    user_id: id,
+                    reg_num: regNum
+                }
+            })
+
+            if (isSended) return res.status(400).json({ message: 'Тендер уже отправлен' })
+
+            const findUser = await Users.findOne({
+                where: {
+                    id: id
+                }
+            })
+
+            for (let i = 0; i < tenderSpecialistsArray.length; i++) {
+                const specialistEmail = tenderSpecialistsArray[i];
+                await sendEmail(
+                    'Заявка для тендерного специалиста',
+                    `
+                    Ссылка на тендер - ${process.env.CLIEN_HOST}/tender/${regNum}\n\n
+                    Email пользователя - ${findUser.email}
+                    `,
+                    specialistEmail
+                ).catch((err) => console.log(err))
+            }
+
+            const createIsSended = await sendTenderSpecialist.create({
+                user_id: id,
+                reg_num: regNum
+
+            })
+
+            return res.json({ message: 'Отправлено тендерному специалисту!' })
+
+        } catch (error) {
+            return res.status(400).json({ message: 'Ошибка отправки. Попробуйте позже' })
+        }
+    }
+
+
+    async checkSendToTenderSpecialist(req, res) {
+        try {
+
+            const id = req.user.id
+            const { regNum } = req.body
+
+            const isSended = await sendTenderSpecialist.findOne({
+                where: {
+                    user_id: id,
+                    reg_num: regNum
+                }
+            })
+
+            if (isSended) return res.json({ message: true })
+            return res.json({ message: false })
+
+        } catch (error) {
+            return res.status(400).json({ message: 'Ошибка проверки. Попробуйте позже' })
         }
     }
 
