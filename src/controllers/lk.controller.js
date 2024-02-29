@@ -283,7 +283,7 @@ class LkController {
                 await sendEmail(
                     'Заявка для тендерного специалиста',
                     `
-                    Ссылка на тендер - ${process.env.CLIEN_HOST}/tender/${regNum}\n\n
+                    Ссылка на тендер - ${process.env.CLIENT_HOST}/tender/${regNum}\n\n
                     Email пользователя - ${findUser.email}
                     `,
                     specialistEmail
