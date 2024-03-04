@@ -28,7 +28,7 @@ export const AutoSearch = async () => {
             if (autoSearchParams.tags != "" && autoSearchParams.stopTags == "") {
 
                 query.push(
-                    { $text: { $search: tags } }, { score: { $meta: "text Score" } }
+                    { $text: { $search: tags } }
                 )
 
             }
