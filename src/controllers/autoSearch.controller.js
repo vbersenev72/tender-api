@@ -625,8 +625,8 @@ class AutoSearchController {
             const regexArray = readed.map((tdnr) => new RegExp(tdnr.reg_num));
             query.push({
                 $or: [
-                    { 'registrationNumber': { $nin: regexArray } },
-                    { 'commonInfo.purchaseNumber': { $nin: regexArray } },
+                    { 'registrationNumber': { regexArray } },
+                    { 'commonInfo.purchaseNumber': { regexArray } },
                 ]
             })
             console.log(readed.map((tdnr) => tdnr.reg_num))
