@@ -622,13 +622,13 @@ class AutoSearchController {
                 })
             }
 
-            // query.push({
-            //     $or: [
-            //         { 'registrationNumber': { $not: { $in: readed.map((tdnr) => tdnr.reg_num) } } },
-            //         { 'commonInfo.purchaseNumber': { $not: { $in: readed.map((tdnr) => tdnr.reg_num) } } },
-            //     ]
-            // })
-            console.log(readed);
+            query.push({
+                $or: [
+                    { 'registrationNumber': { $not: { $in: readed.map((tdnr) => tdnr.reg_num) } } },
+                    { 'commonInfo.purchaseNumber': { $not: { $in: readed.map((tdnr) => tdnr.reg_num) } } },
+                ]
+            })
+            console.log(readed.map((tdnr) => tdnr.reg_num))
 
             const client = await connectDB()
             const db = client.db(process.env.MONGO_DB_NAME)
@@ -681,14 +681,7 @@ class AutoSearchController {
                 }
             }
 
-            const result = await collection.find({ $and: query, $or: [
-                { 'registrationNumber': { $not: { $in: readed.map((tdnr) => tdnr.reg_num) } } },
-                { 'commonInfo.purchaseNumber': { $not: { $in: readed.map((tdnr) => tdnr.reg_num) } } },
-            ] })
-            .skip(Number(start))
-            .limit(Number(limit))
-            .sort(sortParams)
-            .toArray();
+            const result = await collection.find({ $and: query }).skip(Number(start)).limit(Number(limit)).sort(sortParams).toArray();
 
 
             return res.json({ message: result, count: countNewTenders })
