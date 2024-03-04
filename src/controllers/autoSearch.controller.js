@@ -678,7 +678,7 @@ class AutoSearchController {
                 }
             }
 
-            const result = await collection.find({ $and: query }).skip(start).limit(limit).sort(sortParams).toArray();
+            const result = await collection.find({ $and: query }).skip(Number(start)).limit(Number(limit)).sort(sortParams).toArray();
 
 
             return res.json({message: result, count: countNewTenders})
