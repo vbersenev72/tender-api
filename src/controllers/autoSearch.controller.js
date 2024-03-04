@@ -626,6 +626,7 @@ class AutoSearchController {
                     { 'commonInfo.purchaseNumber': { $nin: readed.map((tdnr) => tdnr.reg_num) } },
                 ]
             })
+            console.log(readed);
 
             const client = await connectDB()
             const db = client.db(process.env.MONGO_DB_NAME)
