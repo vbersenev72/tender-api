@@ -676,9 +676,9 @@ class AutoSearchController {
             const regexArray = readed.map((tdnr) => (tdnr.reg_num));
 
 
-            if (query) {
+            if (Object.keys(query).length != 0) {
                 const result = await collection.find({
-                    $and: query, $or: [
+                    $and: query, $and: [
                         { 'registrationNumber': { $nin: regexArray } },
                         { 'commonInfo.purchaseNumber': { $nin: regexArray } },
                     ]
@@ -688,11 +688,12 @@ class AutoSearchController {
                     .sort(sortParams)
                     .toArray();
 
-
                 return res.json({ message: result, count: countNewTenders })
+
             } else {
+
                 const result = await collection.find({
-                    $or: [
+                    $and: [
                         { 'registrationNumber': { $nin: regexArray } },
                         { 'commonInfo.purchaseNumber': { $nin: regexArray } },
                     ]
@@ -702,8 +703,8 @@ class AutoSearchController {
                     .sort(sortParams)
                     .toArray();
 
-
                 return res.json({ message: result, count: countNewTenders })
+
             }
 
 
