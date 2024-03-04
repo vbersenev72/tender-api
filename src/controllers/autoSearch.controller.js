@@ -622,15 +622,6 @@ class AutoSearchController {
                 })
             }
 
-            const regexArray = readed.map((tdnr) => (tdnr.reg_num));
-            query.push({
-                $or: [
-                    { 'registrationNumber': { $nin: regexArray } },
-                    { 'commonInfo.purchaseNumber': { $nin: regexArray } },
-                ]
-            })
-            console.log(readed.map((tdnr) => tdnr.reg_num))
-
             const client = await connectDB()
             const db = client.db(process.env.MONGO_DB_NAME)
             const collection = db.collection('tender')
@@ -682,7 +673,21 @@ class AutoSearchController {
                 }
             }
 
-            const result = await collection.find({ $and: query }).skip(Number(start)).limit(Number(limit)).sort(sortParams).toArray();
+            const regexArray = readed.map((tdnr) => (tdnr.reg_num));
+
+
+            const result = await collection.find({
+                $and: query, $and: {
+                    $or: [
+                        { 'registrationNumber': { $nin: regexArray } },
+                        { 'commonInfo.purchaseNumber': { $nin: regexArray } },
+                    ]
+                }
+            })
+                .skip(Number(start))
+                .limit(Number(limit))
+                .sort(sortParams)
+                .toArray();
 
 
             return res.json({ message: result, count: countNewTenders })
