@@ -624,8 +624,8 @@ class AutoSearchController {
 
             query.push({
                 $or: [
-                    { 'registrationNumber': { $not: { $in: readed.map((tdnr) => tdnr.reg_num) } } },
-                    { 'commonInfo.purchaseNumber': { $not: { $in: readed.map((tdnr) => tdnr.reg_num) } } },
+                    { 'registrationNumber': { $not: { $in: readed.map((tdnr) => new RegExp(tdnr.reg_num)) } } },
+                    { 'commonInfo.purchaseNumber': { $not: { $in: readed.map((tdnr) => new RegExp(tdnr.reg_num)) } } },
                 ]
             })
             console.log(readed.map((tdnr) => tdnr.reg_num))
