@@ -675,14 +675,11 @@ class AutoSearchController {
 
             const regexArray = readed.map((tdnr) => (tdnr.reg_num));
 
-
             const result = await collection.find({
-                $and: query, $and: {
-                    $or: [
-                        { 'registrationNumber': { $nin: regexArray } },
-                        { 'commonInfo.purchaseNumber': { $nin: regexArray } },
-                    ]
-                }
+                $and: query, $or: [
+                    { 'registrationNumber': { $nin: regexArray } },
+                    { 'commonInfo.purchaseNumber': { $nin: regexArray } },
+                ]
             })
                 .skip(Number(start))
                 .limit(Number(limit))
