@@ -296,10 +296,12 @@ class AutoSearchController {
                 },
             })
 
-            const newTenders = await AutoSearchResult.findAll({where: {
-                user_id: id,
-                autosearch_id: autoSearchId
-            }})
+            const newTenders = await AutoSearchResult.findAll({
+                where: {
+                    user_id: id,
+                    autosearch_id: autoSearchId
+                }
+            })
 
             const countNewTenders = newTenders.length
 
@@ -622,8 +624,8 @@ class AutoSearchController {
 
             query.push({
                 $or: [
-                    { 'registrationNumber': { $nin: readed.map((tdnr) => tdnr.reg_num) } },
-                    { 'commonInfo.purchaseNumber': { $nin: readed.map((tdnr) => tdnr.reg_num) } },
+                    { 'registrationNumber': { $not: { $in: readed.map((tdnr) => tdnr.reg_num) } } },
+                    { 'commonInfo.purchaseNumber': { $not: { $in: readed.map((tdnr) => tdnr.reg_num) } } },
                 ]
             })
             console.log(readed);
@@ -682,7 +684,7 @@ class AutoSearchController {
             const result = await collection.find({ $and: query }).skip(Number(start)).limit(Number(limit)).sort(sortParams).toArray();
 
 
-            return res.json({message: result, count: countNewTenders})
+            return res.json({ message: result, count: countNewTenders })
 
 
 
