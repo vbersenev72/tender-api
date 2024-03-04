@@ -810,7 +810,7 @@ class AutoSearchController {
                 reg_num: regNum,
             })
 
-            const deleteFromResult = await isReadTenders.destroy({where: {
+            const deleteFromResult = await AutoSearchResult.destroy({where: {
                 user_id: id,
                 reg_num: regNum
             }})
