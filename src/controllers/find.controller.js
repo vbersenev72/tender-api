@@ -87,6 +87,10 @@ class FindController {
 
             } = req.body
 
+            let sort = req?.query?.sort ? req?.query?.sort : 'publicDate'
+            // publicDate, customDate, Price, FinishDate
+            // publicDateReverse, customDateRevers, PriceReverse, FinishDateReverse
+
             let start = Number(page) * limit
             if (page == 1) {
                 start = 0
@@ -483,10 +487,54 @@ class FindController {
                 })
             }
 
-
-
             console.log(query);
 
+            let sortParams
+
+            if (sort == 'publicDate') {
+                sortParams = { customDate: -1 }
+            }
+            if (sort == 'customDate') {
+                sortParams = { customDate: -1 }
+            }
+            if (sort == 'Price') {
+                sortParams = {
+                    $or: [
+                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': -1 },
+                        { 'lots.lot.lotData.initialSum': -1 }
+                    ]
+                }
+            }
+            if (sort == 'FinishDate') {
+                sortParams = {
+                    $or: [
+                        { 'submissionCloseDateTime': -1 },
+                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': -1 }
+                    ]
+                }
+            }
+            if (sort == 'publicDateReverse') {
+                sortParams = { customDate: 1 }
+            }
+            if (sort == 'customDateReverse') {
+                sortParams = { customDate: 1 }
+            }
+            if (sort == 'PriceReverse') {
+                sortParams = {
+                    $or: [
+                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': 1 },
+                        { 'lots.lot.lotData.initialSum': 1 }
+                    ]
+                }
+            }
+            if (sort == 'FinishDateReverse') {
+                sortParams = {
+                    $or: [
+                        { 'submissionCloseDateTime': 1 },
+                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': 1 }
+                    ]
+                }
+            }
 
             const client = await connectDB()
             const db = client.db(process.env.MONGO_DB_NAME)
@@ -495,9 +543,9 @@ class FindController {
             let result
 
             if (query.length > 0) {
-                result = await collection.find({ $and: query }).sort({ customDate: -1 }).skip(start).limit(limit).toArray();
+                result = await collection.find({ $and: query }).sort(sortParams).skip(start).limit(limit).toArray();
             } else {
-                result = await collection.find().skip(start).limit(limit).sort({ customDate: -1 }).toArray();
+                result = await collection.find().sort(sortParams).skip(start).limit(limit).toArray();
             }
 
             return res.json({ message: result })
