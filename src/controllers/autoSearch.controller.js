@@ -810,6 +810,11 @@ class AutoSearchController {
                 reg_num: regNum,
             })
 
+            const deleteFromResult = await isReadTenders.destroy({where: {
+                user_id: id,
+                reg_num: regNum
+            }})
+
             return res.json({ message: 'Отмечено как прочитанное!' })
 
 
