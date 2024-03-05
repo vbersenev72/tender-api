@@ -540,6 +540,9 @@ class FindController {
             const db = client.db(process.env.MONGO_DB_NAME)
             const collection = db.collection('tender')
 
+            console.log(JSON.stringify(query));
+            console.log(JSON.stringify(sortParams));
+
             let result
 
             if (query.length > 0) {
