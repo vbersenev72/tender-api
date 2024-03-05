@@ -499,11 +499,10 @@ class FindController {
             }
             if (sort == 'Price') {
                 sortParams = {
-                    // $or: [
-                    //     { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': -1 },
-                    //     { 'lots.lot.lotData.initialSum': -1 }
-                    // ]
-                    'lots.lot.lotData.initialSum': -1
+                    $or: [
+                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': -1 },
+                        { 'lots.lot.lotData.initialSum': -1 }
+                    ]
                 }
             }
             if (sort == 'FinishDate') {
@@ -522,11 +521,10 @@ class FindController {
             }
             if (sort == 'PriceReverse') {
                 sortParams = {
-                    // $or: [
-                    //     { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': 1 },
-                    //     { 'lots.lot.lotData.initialSum': 1 }
-                    // ]
-                    'lots.lot.lotData.initialSum': 1
+                    $or: [
+                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': 1 },
+                        { 'lots.lot.lotData.initialSum': 1 }
+                    ]
                 }
             }
             if (sort == 'FinishDateReverse') {
