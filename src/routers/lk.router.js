@@ -13,6 +13,7 @@ lkRouter.get('/profile', authMiddleware, lkController.getProfileInfo)
 lkRouter.post('/profile', authMiddleware, lkController.editProlife)
 lkRouter.post('/resetpass', lkController.resetPass)
 lkRouter.post('/sendtenderspecialist', authMiddleware, lkController.sendToTenderSpecialist)
+lkRouter.post('/sendtogivefeedback', authMiddleware, lkController.sendEmailToGiveFeedBack)
 lkRouter.post('/checksendtenderspecialist', authMiddleware, lkController.checkSendToTenderSpecialist)
 
 

@@ -304,6 +304,39 @@ class LkController {
     }
 
 
+    async sendEmailToGiveFeedBack(req, res) {
+        try {
+
+            const id = req.user.id
+            const { text } = req.body
+
+            const findUser = await Users.findOne({
+                where: {
+                    id: id
+                }
+            })
+
+            for (let i = 0; i < tenderSpecialistsArray.length; i++) {
+                const specialistEmail = tenderSpecialistsArray[i];
+                await sendEmail(
+                    'Вопрос для администратора',
+                    `
+                    Вопрос от пользователя: ${text}\n\n\n
+                    Email пользователя - ${findUser.email}
+                    `,
+                    specialistEmail
+                ).catch((err) => console.log(err))
+            }
+
+
+            return res.json({ message: 'Вопрос отправлен!' })
+
+        } catch (error) {
+            return res.status(400).json({ message: 'Ошибка отправки. Попробуйте позже' })
+        }
+    }
+
+
     async checkSendToTenderSpecialist(req, res) {
         try {
 
