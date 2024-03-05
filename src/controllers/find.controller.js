@@ -500,8 +500,8 @@ class FindController {
             if (sort == 'Price') {
                 sortParams = {
                     $or: [
-                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': -1 },
-                        { 'lots.lot.lotData.initialSum': -1 }
+                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': '-1' },
+                        { 'lots.lot.lotData.initialSum': '-1' }
                     ]
                 }
             }
@@ -522,8 +522,8 @@ class FindController {
             if (sort == 'PriceReverse') {
                 sortParams = {
                     $or: [
-                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': 1 },
-                        { 'lots.lot.lotData.initialSum': 1 }
+                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': '1' },
+                        { 'lots.lot.lotData.initialSum': '1' }
                     ]
                 }
             }
