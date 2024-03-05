@@ -13,7 +13,7 @@ export function deleteUselessFields(obj) {
     for (let prop in obj) {
         if (prop === '_uniques' || prop === '_totalRecords' || prop === 'signature') {
             delete obj[prop];
-        }  if (typeof obj[prop] === 'object' && obj[prop] != null) {
+        } if (typeof obj[prop] === 'object' && obj[prop] != null) {
             deleteUselessFields(obj[prop]);
         }
     }
@@ -499,18 +499,14 @@ class FindController {
             }
             if (sort == 'Price') {
                 sortParams = {
-                    $or: [
-                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': '-1' },
-                        { 'lots.lot.lotData.initialSum': '-1' }
-                    ]
+                    'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': -1,
+                    'lots.lot.lotData.initialSum': -1
                 }
             }
             if (sort == 'FinishDate') {
                 sortParams = {
-                    $or: [
-                        { 'submissionCloseDateTime': -1 },
-                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': -1 }
-                    ]
+                    'submissionCloseDateTime': -1,
+                    'notificationInfo.procedureInfo.collectingInfo.endDT': -1
                 }
             }
             if (sort == 'publicDateReverse') {
@@ -521,18 +517,14 @@ class FindController {
             }
             if (sort == 'PriceReverse') {
                 sortParams = {
-                    $or: [
-                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': '1' },
-                        { 'lots.lot.lotData.initialSum': '1' }
-                    ]
+                    'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': 1,
+                    'lots.lot.lotData.initialSum': 1
                 }
             }
             if (sort == 'FinishDateReverse') {
                 sortParams = {
-                    $or: [
-                        { 'submissionCloseDateTime': 1 },
-                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': 1 }
-                    ]
+                    'submissionCloseDateTime': 1,
+                    'notificationInfo.procedureInfo.collectingInfo.endDT': 1
                 }
             }
 
@@ -546,9 +538,22 @@ class FindController {
             let result
 
             if (query.length > 0) {
-                result = await collection.find({ $and: query }).sort(sortParams).skip(start).limit(limit).toArray();
+                //result = await collection.find({ $and: query }).sort(sortParams).skip(start).limit(limit).toArray();
+                result = await collection.aggregate([
+                    { $match: { $and: query } },
+                    { $sort: sortParams }
+                ])
+                    .skip(start)
+                    .limit(limit)
+                    .toArray();
             } else {
-                result = await collection.find().sort(sortParams).skip(start).limit(limit).toArray();
+                //result = await collection.find().sort(sortParams).skip(start).limit(limit).toArray();
+                result = await collection.aggregate([
+                    { $sort: sortParams }
+                ])
+                    .skip(start)
+                    .limit(limit)
+                    .toArray();
             }
 
             return res.json({ message: result })
@@ -788,7 +793,7 @@ class FindController {
             let result = await Promise.all(promises)
             result = Object.fromEntries([...result, ['tender', [tender]]])
 
-            return res.json({message: result})
+            return res.json({ message: result })
 
         } catch (error) {
             console.log(error);
