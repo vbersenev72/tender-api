@@ -542,7 +542,7 @@ class FindController {
             if (query.length > 0) {
                 result = await collection.find({ $and: query }).sort(sortParams).skip(start).limit(limit).toArray();
             } else {
-                result = await collection.find().sort(sortParams).skip(start).limit(limit).toArray();
+                result = await collection.find().skip(start).limit(limit).sort(sortParams).toArray();
             }
 
             return res.json({ message: result })
