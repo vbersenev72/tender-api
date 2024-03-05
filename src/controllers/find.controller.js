@@ -13,7 +13,7 @@ export function deleteUselessFields(obj) {
     for (let prop in obj) {
         if (prop === '_uniques' || prop === '_totalRecords' || prop === 'signature') {
             delete obj[prop];
-        }  if (typeof obj[prop] === 'object' && obj[prop] != null) {
+        } if (typeof obj[prop] === 'object' && obj[prop] != null) {
             deleteUselessFields(obj[prop]);
         }
     }
@@ -499,10 +499,8 @@ class FindController {
             }
             if (sort == 'Price') {
                 sortParams = {
-                    $or: [
-                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': -1 },
-                        { 'lots.lot.lotData.initialSum': -1 }
-                    ]
+                    'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': -1,
+                    'lots.lot.lotData.initialSum': -1
                 }
             }
             if (sort == 'FinishDate') {
@@ -521,10 +519,8 @@ class FindController {
             }
             if (sort == 'PriceReverse') {
                 sortParams = {
-                    $or: [
-                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': 1 },
-                        { 'lots.lot.lotData.initialSum': 1 }
-                    ]
+                    'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': 1,
+                    'lots.lot.lotData.initialSum': 1
                 }
             }
             if (sort == 'FinishDateReverse') {
@@ -788,7 +784,7 @@ class FindController {
             let result = await Promise.all(promises)
             result = Object.fromEntries([...result, ['tender', [tender]]])
 
-            return res.json({message: result})
+            return res.json({ message: result })
 
         } catch (error) {
             console.log(error);
