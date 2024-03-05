@@ -523,8 +523,10 @@ class FindController {
             }
             if (sort == 'FinishDateReverse') {
                 sortParams = {
-                    'submissionCloseDateTime': 1,
-                    'notificationInfo.procedureInfo.collectingInfo.endDT': 1
+                    $or: [
+                        { 'submissionCloseDateTime': 1 },
+                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': 1 }
+                    ]
                 }
             }
 
@@ -539,22 +541,8 @@ class FindController {
 
             if (query.length > 0) {
                 result = await collection.find({ $and: query }).sort(sortParams).skip(start).limit(limit).toArray();
-                // result = await collection.aggregate([
-                //     { $match: { $and: query } },
-                //     { $sort: { ...sortParams } }
-                // ])
-                //     .skip(start)
-                //     .limit(limit)
-                //     .toArray();
             } else {
                 result = await collection.find().sort(sortParams).skip(start).limit(limit).toArray();
-                // result = await collection.aggregate([
-                //     // { $match: { $and: query } },
-                //     { $sort: sortParams }
-                // ])
-                //     .skip(start)
-                //     .limit(limit)
-                //     .toArray();
             }
 
             return res.json({ message: result })
