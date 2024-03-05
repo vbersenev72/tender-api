@@ -499,18 +499,14 @@ class FindController {
             }
             if (sort == 'Price') {
                 sortParams = {
-                    $or: [
-                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': -1 },
-                        { 'lots.lot.lotData.initialSum': -1 }
-                    ]
+                    'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': -1,
+                    'lots.lot.lotData.initialSum': -1
                 }
             }
             if (sort == 'FinishDate') {
                 sortParams = {
-                    $or: [
-                        { 'submissionCloseDateTime': -1 },
-                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': -1 }
-                    ]
+                    'submissionCloseDateTime': -1,
+                    'notificationInfo.procedureInfo.collectingInfo.endDT': -1
                 }
             }
             if (sort == 'publicDateReverse') {
@@ -521,18 +517,14 @@ class FindController {
             }
             if (sort == 'PriceReverse') {
                 sortParams = {
-                    $or: [
-                        { 'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': 1 },
-                        { 'lots.lot.lotData.initialSum': 1 }
-                    ]
+                    'notificationInfo.contractConditionsInfo.maxPriceInfo.maxPrice': 1,
+                    'lots.lot.lotData.initialSum': 1
                 }
             }
             if (sort == 'FinishDateReverse') {
                 sortParams = {
-                    $or: [
-                        { 'submissionCloseDateTime': 1 },
-                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': 1 }
-                    ]
+                    'submissionCloseDateTime': 1,
+                    'notificationInfo.procedureInfo.collectingInfo.endDT': 1
                 }
             }
 
@@ -546,23 +538,23 @@ class FindController {
             let result
 
             if (query.length > 0) {
-                //result = await collection.find({ $and: query }).sort(sortParams).skip(start).limit(limit).toArray();
-                result = await collection.aggregate([
-                    { $match: { $and: query } },
-                    { $sort: {...sortParams} }
-                ])
-                .skip(start)
-                .limit(limit)
-                .toArray();
+                result = await collection.find({ $and: query }).sort(sortParams).skip(start).limit(limit).toArray();
+                // result = await collection.aggregate([
+                //     { $match: { $and: query } },
+                //     { $sort: { ...sortParams } }
+                // ])
+                //     .skip(start)
+                //     .limit(limit)
+                //     .toArray();
             } else {
-                //result = await collection.find().sort(sortParams).skip(start).limit(limit).toArray();
-                result = await collection.aggregate([
-                    // { $match: { $and: query } },
-                    { $sort: sortParams }
-                ])
-                .skip(start)
-                .limit(limit)
-                .toArray();
+                result = await collection.find().sort(sortParams).skip(start).limit(limit).toArray();
+                // result = await collection.aggregate([
+                //     // { $match: { $and: query } },
+                //     { $sort: sortParams }
+                // ])
+                //     .skip(start)
+                //     .limit(limit)
+                //     .toArray();
             }
 
             return res.json({ message: result })
