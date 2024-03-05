@@ -490,33 +490,12 @@ class FindController {
             console.log(query);
 
             let sortParams
-            let sortField
 
             if (sort == 'publicDate') {
-                sortParams = {
-                    $addFields: {
-                        combinedField: {
-                            $concat: [
-                                { $ifNull: ["$customDate", ""] },
-                            ]
-                        }
-                    }
-                }
-                sortField = { combinedField: -1 }
-
+                sortParams = { customDate: -1 }
             }
             if (sort == 'customDate') {
-                sortParams = {
-                    $addFields: {
-                        combinedField: {
-                            $concat: [
-                                { $ifNull: ["$customDate", ""] },
-                            ]
-                        }
-                    }
-                }
-                sortField = { combinedField: -1 }
-
+                sortParams = { customDate: -1 }
             }
             if (sort == 'Price') {
                 sortParams = {
@@ -535,30 +514,10 @@ class FindController {
                 }
             }
             if (sort == 'publicDateReverse') {
-                sortParams = {
-                    $addFields: {
-                        combinedField: {
-                            $concat: [
-                                { $ifNull: ["$customDate", ""] },
-                            ]
-                        }
-                    }
-                }
-                sortField = { combinedField: 1 }
-
+                sortParams = { customDate: 1 }
             }
             if (sort == 'customDateReverse') {
-                sortParams = {
-                    $addFields: {
-                        combinedField: {
-                            $concat: [
-                                { $ifNull: ["$customDate", ""] },
-                            ]
-                        }
-                    }
-                }
-                sortField = { combinedField: 1 }
-
+                sortParams = { customDate: 1 }
             }
             if (sort == 'PriceReverse') {
                 sortParams = {
@@ -589,23 +548,21 @@ class FindController {
             if (query.length > 0) {
                 //result = await collection.find({ $and: query }).sort(sortParams).skip(start).limit(limit).toArray();
                 result = await collection.aggregate([
-
                     { $match: { $and: query } },
-                    sortParams,
-                    { $sort: sortField }
+                    { $sort: {...sortParams} }
                 ])
-                    .skip(start)
-                    .limit(limit)
-                    .toArray();
+                .skip(start)
+                .limit(limit)
+                .toArray();
             } else {
                 //result = await collection.find().sort(sortParams).skip(start).limit(limit).toArray();
                 result = await collection.aggregate([
-
+                    // { $match: { $and: query } },
                     { $sort: sortParams }
                 ])
-                    .skip(start)
-                    .limit(limit)
-                    .toArray();
+                .skip(start)
+                .limit(limit)
+                .toArray();
             }
 
             return res.json({ message: result })
