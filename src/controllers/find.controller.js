@@ -89,7 +89,7 @@ class FindController {
 
             let sort = req?.query?.sort ? req?.query?.sort : 'publicDate'
             // publicDate, customDate, Price, FinishDate
-            // publicDateReverse, customDateRevers, PriceReverse, FinishDateReverse
+            // publicDateReverse, customDateReverse, PriceReverse, FinishDateReverse
 
             let start = Number(page) * limit
             if (page == 1) {

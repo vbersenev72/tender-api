@@ -281,7 +281,7 @@ class AutoSearchController {
 
 
             // publicDate, customDate, Price, FinishDate
-            // publicDateReverse, customDateRevers, PriceReverse, FinishDateReverse
+            // publicDateReverse, customDateReverse, PriceReverse, FinishDateReverse
 
             const autoSearchParams = await AutoSearch.findOne({
                 where: {
