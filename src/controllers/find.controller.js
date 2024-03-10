@@ -476,7 +476,7 @@ class FindController {
             if (query.length > 0) {
                 // result = await collection.find({ $and: query }).sort(sortParams).skip(start).limit(limit).toArray();
                 result = await collection.aggregate([
-                    { $match: query },
+                    { $match: { $and: query } },
                     { $sort: { customDate: -1 } },
                     { $limit: 500 },
                     { $sort: sortParams },
