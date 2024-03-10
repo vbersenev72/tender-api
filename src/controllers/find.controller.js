@@ -474,9 +474,25 @@ class FindController {
             let result
 
             if (query.length > 0) {
-                result = await collection.find({ $and: query }).sort(sortParams).skip(start).limit(limit).toArray();
+                // result = await collection.find({ $and: query }).sort(sortParams).skip(start).limit(limit).toArray();
+                result = await collection.aggregate([
+                    { $match: query },
+                    { $sort: { customDate: -1 } },
+                    { $limit: 500 },
+                    { $sort: sortParams },
+                    { $skip: start },
+                    { $limit: limit }
+                ]).toArray()
+
             } else {
-                result = await collection.find().sort(sortParams).skip(start).limit(limit).toArray();
+                //result = await collection.find().sort(sortParams).skip(start).limit(limit).toArray();
+                result = await collection.aggregate([
+                    { $sort: { customDate: -1 } },
+                    { $limit: 500 },
+                    { $sort: sortParams },
+                    { $skip: start },
+                    { $limit: limit }
+                ]).toArray()
             }
 
             return res.json({ message: result })
