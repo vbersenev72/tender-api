@@ -399,70 +399,6 @@ class FindController {
 
             }
 
-            ////////////////
-            // if (purchaseStage !== '') {
-            //     const stageValues = purchaseStage.split(/;| /).filter(code => code !== '');
-
-            //     const regexQuery = stageValues.forEach((value) => {
-
-            //         if (value.toLowerCase() == 'Подача заявок') {
-
-            //             query.push({
-            //                 $and: [
-            //                     {
-            //                         $or: [
-            //                             { 'notificationInfo.procedureInfo.collectingInfo.startDT': { $lte: new Date().toISOString() }, },
-            //                             { 'publicationDateTime': { $lte: new Date().toISOString() } },
-            //                         ]
-            //                     },
-            //                     {
-            //                         $or: [
-            //                             { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $gte: new Date().toISOString() } },
-            //                             { 'submissionCloseDateTime': { $gte: new Date().toISOString() } },
-            //                         ]
-            //                     }
-            //                 ]
-            //             })
-            //         }
-
-            //         if (value.toLowerCase() == 'Работа комиссии') {
-            //             query.push({
-            //                 $or: [
-            //                     { 'notificationInfo.procedureInfo.collectingInfo.endDT': { $lte: new Date() } },
-            //                     { 'submissionCloseDateTime': { $lte: new Date().toISOString() } },
-            //                 ]
-            //             })
-            //         }
-
-            //         if (value.toLowerCase() == 'Закупка завершена') {
-            //             query.push({
-            //                 $or: [
-            //                     { "notificationInfo.procedureInfo.summarizingDate": { $lte: new Date() } },
-            //                     { "placingProcedure.summingupDateTime": { $lte: new Date() } },
-            //                 ]
-            //             })
-            //         }
-            //         if (value.toLowerCase() == 'Закупка приостановлена') {
-            //             query.push({
-            //                 $or: [
-            //                     { "notificationInfo.procedureInfo.summarizingDate": { $lte: new Date() } },
-            //                     { "placingProcedure.summingupDateTime": { $lte: new Date() } },
-            //                 ]
-            //             })
-            //         }
-            //         if (value.toLowerCase() == 'Закупка отменена') {
-            //             query.push({
-            //                 $or: [
-            //                     { "notificationInfo.procedureInfo.summarizingDate": { $lte: new Date() } },
-            //                     { 'placingProcedure.summingupDateTime': { $lte: new Date() } },
-            //                 ]
-            //             })
-            //         }
-
-            //     })
-
-            // }
-
 
 
             if (fz != '') {
@@ -523,10 +459,8 @@ class FindController {
             }
             if (sort == 'FinishDateReverse') {
                 sortParams = {
-                    $or: [
-                        { 'submissionCloseDateTime': 1 },
-                        { 'notificationInfo.procedureInfo.collectingInfo.endDT': 1 }
-                    ]
+                    'submissionCloseDateTime': 1,
+                    'notificationInfo.procedureInfo.collectingInfo.endDT': 1
                 }
             }
 
