@@ -759,7 +759,7 @@ class FindController {
             const db = client.db(process.env.MONGO_DB_NAME)
             const collection = db.collection('tender')
 
-            const tender = await collection.findOne({
+            const tender = await collection.find({
                 $or: [
                     { "customer.mainInfo.inn": id },
                     { registrationNumber: id },
