@@ -748,7 +748,7 @@ class FindController {
             const id = req.params.id
 
             const page = req.query.page
-            const limit = req.query.limit
+            const limit = Number(req.query.limit)
 
             let start = Number(page) * limit
             if (page == 1) {
