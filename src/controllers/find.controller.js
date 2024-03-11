@@ -766,7 +766,7 @@ class FindController {
                     { 'commonInfo.purchaseNumber': id },
                     { 'purchaseResponsibleInfo.responsibleOrgInfo.INN': id }
                 ]
-            }).skip(start).limit(limit).toArray
+            }).skip(start).limit(limit).toArray()
 
 
 
