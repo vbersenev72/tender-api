@@ -747,6 +747,14 @@ class FindController {
 
             const id = req.params.id
 
+            const page = req.query.page
+            const limit = req.query.limit
+
+            let start = Number(page) * limit
+            if (page == 1) {
+                start = 0
+            }
+
             const client = await connectDB()
             const db = client.db(process.env.MONGO_DB_NAME)
             const collection = db.collection('tender')
@@ -758,13 +766,13 @@ class FindController {
                     { 'commonInfo.purchaseNumber': id },
                     { 'purchaseResponsibleInfo.responsibleOrgInfo.INN': id }
                 ]
-            })
+            }).skip(start).limit(limit).toArray
 
 
 
             if (!tender) return res.status(400).json({ message: 'not found' })
 
-            return res.json({ tender: [tender] })
+            return res.json({ tender: tender })
 
         } catch (error) {
             console.log(error);
